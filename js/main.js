@@ -56,3 +56,46 @@ document.querySelectorAll('.stepper button').forEach((btn) => {
   });
 });
 render();
+
+// Автоматическое плавное перелистывание секций
+(function autoFlip() {
+  // не мешаем людям с настройкой "уменьшить анимацию"
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ids = ['top', 'steps', 'services', 'cases', 'author', 'pricing', 'faq', 'contacts'];
+  const els = ids.map((id) => document.getElementById(id)).filter(Boolean);
+  if (!els.length) return;
+
+  const INTERVAL = 7000;   // секунда на секцию
+  const PAUSE_AFTER_ACTION = 15000; // пауза после действия пользователя
+  let paused = false;
+  let resumeTimer = null;
+
+  function currentIndex() {
+    const y = window.scrollY + window.innerHeight * 0.4;
+    for (let i = 0; i < els.length; i++) {
+      if (els[i].offsetTop > y) return Math.max(0, i - 1);
+    }
+    return els.length - 1;
+  }
+
+  function go(i) {
+    const next = (i + els.length) % els.length; // в конце - снова наверх
+    els[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function userPause() {
+    paused = true;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { paused = false; }, PAUSE_AFTER_ACTION);
+  }
+
+  // пользователь листает сам (колесо, касание, клавиши) - даём ему управление
+  ['wheel', 'touchstart', 'keydown'].forEach((ev) =>
+    window.addEventListener(ev, userPause, { passive: true }));
+
+  setInterval(() => {
+    if (paused || document.hidden) return;
+    go(currentIndex() + 1);
+  }, INTERVAL);
+})();
