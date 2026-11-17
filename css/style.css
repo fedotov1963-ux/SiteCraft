@@ -63,7 +63,9 @@ header.scrolled {
 .pill:active { transform: scale(.98); }
 .pill .circle {
   width: 30px; height: 30px; border-radius: 50%;
-  background: var(--blue); display: grid; place-items: center; flex: none;
+  background: linear-gradient(135deg, #2E6BFF, #6D3DF5);
+  box-shadow: 0 4px 12px rgba(46,107,255,.4);
+  display: grid; place-items: center; flex: none;
 }
 .pill .circle svg { width: 14px; height: 14px; stroke: #fff; }
 .burger {
@@ -170,9 +172,16 @@ header.scrolled {
   padding: 15px 30px; border-radius: 12px;
   transition: background .2s, box-shadow .2s, transform .1s;
 }
-.btn-primary { background: var(--blue); color: var(--white); }
-.btn-primary:hover { background: var(--blue-dark); box-shadow: 0 8px 24px rgba(46,107,255,.35); }
-.btn-primary:active { transform: scale(.98); }
+.btn-primary {
+  background: linear-gradient(135deg, #2E6BFF 0%, #6D3DF5 100%);
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(46,107,255,.35), 0 2px 8px rgba(109,61,245,.25);
+}
+.btn-primary:hover {
+  box-shadow: 0 12px 32px rgba(46,107,255,.5), 0 4px 12px rgba(109,61,245,.35);
+  filter: brightness(1.08);
+}
+.btn-primary:active { transform: scale(.98); filter: brightness(1); }
 .btn-ghost-dark {
   background: transparent; color: var(--white);
   border: 1.5px solid rgba(255,255,255,.4);
@@ -271,8 +280,15 @@ h2 { font-size: clamp(25px, 3.4vw, 38px); font-weight: 600; line-height: 1.22; }
   transform: rotate(-45deg);
 }
 .price-card .btn { text-align: center; }
-.price-card.featured .btn-primary { background: var(--lime); color: var(--ink); }
-.price-card.featured .btn-primary:hover { background: #97DE2E; box-shadow: 0 8px 24px rgba(168,245,58,.3); }
+.price-card.featured .btn-primary {
+  background: linear-gradient(135deg, #A8F53A 0%, #7FD12A 100%);
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgba(168,245,58,.35), 0 2px 8px rgba(168,245,58,.2);
+}
+.price-card.featured .btn-primary:hover {
+  box-shadow: 0 12px 32px rgba(168,245,58,.5);
+  filter: brightness(1.05);
+}
 
 /* FAQ */
 .faq { max-width: 760px; margin: 0 auto; }
@@ -305,7 +321,7 @@ details p { color: var(--muted); padding-top: 14px; max-width: 660px; }
 .final .fine { margin-top: 22px; font-size: 14px; color: rgba(255,255,255,.45); }
 
 /* Подвал */
-footer { background: #4A4A4A; color: rgba(255,255,255,.6); padding: 46px 0; font-size: 14px; }
+footer { background: var(--ink); color: rgba(255,255,255,.6); padding: 46px 0; font-size: 14px; }
 .footer-grid { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
 footer a { color: rgba(255,255,255,.7); text-decoration: none; }
 footer a:hover { color: var(--white); }
