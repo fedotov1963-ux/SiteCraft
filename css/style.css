@@ -89,6 +89,7 @@ header.scrolled {
   position: relative; min-height: 100vh;
   display: flex; flex-direction: column;
   color: var(--white);
+  overflow: hidden;
 }
 .hero-bg {
   position: absolute; inset: 0;
@@ -406,8 +407,13 @@ footer a:hover { color: var(--white); }
   .nav-right .pill span { display: none; }
   .nav-right .pill { padding: 8px; }
   .hero-top { padding-top: 130px; }
+  .hero .sub { padding: 14px 18px; }
   .calc { grid-template-columns: 1fr; }
-  .calc-out { border-left: none; border-top: 1px solid rgba(255,255,255,.14); }
+  .calc-input { padding: 24px 20px; }
+  .calc-out { padding: 26px 20px; border-left: none; border-top: 1px solid rgba(255,255,255,.14); }
+  .stepper-row { flex-wrap: wrap; }
+  .stepper { gap: 10px; margin-left: auto; }
+  .stepper .val { min-width: 84px; font-size: 13px; }
   .steps-grid, .cases, .pricing { grid-template-columns: 1fr; }
   .svc { grid-template-columns: 48px 1fr; }
   .svc .tag { grid-column: 2; padding-top: 0; }
