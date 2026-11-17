@@ -422,23 +422,36 @@ footer a:hover { color: var(--white); }
 
 @media (max-width: 900px) {
   section { padding: 68px 0; }
-  .nav { padding: 0 20px; }
+  .nav { padding: 0 20px; height: 64px; }
+  .nav-logo .mark { width: 32px; height: 32px; border-radius: 9px; }
   .nav-right .pill span { display: none; }
   .nav-right .pill { padding: 8px; }
-  .hero-top { padding-top: 96px; }
-  .hero .sub { padding: 14px 18px; }
-  .calc { grid-template-columns: 1fr; }
-  .calc-input { padding: 24px 20px; }
-  .calc-out { padding: 26px 20px; border-left: none; border-top: 1px solid rgba(255,255,255,.14); }
-  .stepper-row { flex-wrap: wrap; }
-  .stepper { gap: 10px; margin-left: auto; }
-  .stepper .val { min-width: 84px; font-size: 13px; }
+  /* hero целиком в один экран телефона */
+  .hero { min-height: 100svh; }
+  .hero-top { padding: 84px 16px 12px; }
+  .hero h1 { font-size: clamp(26px, 8vw, 34px); margin-bottom: 10px; }
+  .hero .sub { font-size: 14px; padding: 10px 14px; line-height: 1.45; }
+  .calc-wrap { padding: 0 16px 20px; }
+  .calc { grid-template-columns: 1fr; border-radius: 16px; }
+  .calc-input { padding: 14px 16px; }
+  .calc-input h3 { font-size: 13.5px; margin-bottom: 6px; }
+  .stepper-row { flex-wrap: nowrap; padding: 7px 0; gap: 8px; }
+  .stepper-row .lbl { font-size: 13.5px; }
+  .stepper { gap: 8px; margin-left: auto; flex: none; }
+  .stepper button { width: 30px; height: 30px; font-size: 17px; }
+  .stepper .val { min-width: 72px; font-size: 12.5px; }
+  .calc-input .hint { margin-top: 8px; font-size: 11.5px; line-height: 1.45; }
+  .calc-out { padding: 12px 16px; border-left: none; border-top: 1px solid rgba(255,255,255,.14); }
+  .calc-out .lbl { font-size: 11.5px; margin-bottom: 2px; }
+  .calc-out .big { font-size: 24px; margin-bottom: 2px; }
+  .calc-out .big small { font-size: 13px; }
+  .calc-out .note { font-size: 11px; margin-top: 6px; line-height: 1.4; }
+  .calc-out .btn { margin-top: 10px; padding: 10px 20px; font-size: 14px; }
   .steps-grid, .cases, .pricing { grid-template-columns: 1fr; }
   .svc { grid-template-columns: 48px 1fr; }
   .svc .tag { grid-column: 2; padding-top: 0; }
   .author-box { grid-template-columns: 1fr; padding: 30px; gap: 28px; }
   .author-photo { max-width: 220px; }
-  .hero { min-height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
