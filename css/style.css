@@ -173,15 +173,29 @@ header.scrolled {
   transition: background .2s, box-shadow .2s, transform .1s;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #2E6BFF 0%, #6D3DF5 100%);
+  position: relative; overflow: hidden;
+  background: linear-gradient(120deg, #2E6BFF 0%, #6D3DF5 50%, #2E6BFF 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0;
   color: var(--white);
   box-shadow: 0 8px 24px rgba(46,107,255,.35), 0 2px 8px rgba(109,61,245,.25);
+  transition: background-position .5s ease, box-shadow .2s, transform .1s, filter .2s;
 }
 .btn-primary:hover {
+  background-position: 100% 0;
   box-shadow: 0 12px 32px rgba(46,107,255,.5), 0 4px 12px rgba(109,61,245,.35);
-  filter: brightness(1.08);
 }
-.btn-primary:active { transform: scale(.98); filter: brightness(1); }
+.btn-primary:active { transform: scale(.98); }
+/* блик, пробегающий по кнопке при наведении */
+.btn-primary::after {
+  content: ""; position: absolute; top: 0; left: -80%;
+  width: 50%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+  pointer-events: none;
+}
+.btn-primary:hover::after { left: 130%; }
 .btn-ghost-dark {
   background: transparent; color: var(--white);
   border: 1.5px solid rgba(255,255,255,.4);
@@ -281,13 +295,16 @@ h2 { font-size: clamp(25px, 3.4vw, 38px); font-weight: 600; line-height: 1.22; }
 }
 .price-card .btn { text-align: center; }
 .price-card.featured .btn-primary {
-  background: linear-gradient(135deg, #A8F53A 0%, #7FD12A 100%);
+  background: linear-gradient(120deg, #A8F53A 0%, #6FE32E 50%, #A8F53A 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0;
   color: var(--ink);
   box-shadow: 0 8px 24px rgba(168,245,58,.35), 0 2px 8px rgba(168,245,58,.2);
+  transition: background-position .5s ease, box-shadow .2s, transform .1s;
 }
 .price-card.featured .btn-primary:hover {
+  background-position: 100% 0;
   box-shadow: 0 12px 32px rgba(168,245,58,.5);
-  filter: brightness(1.05);
 }
 
 /* FAQ */
@@ -320,8 +337,12 @@ details p { color: var(--muted); padding-top: 14px; max-width: 660px; }
 .final .actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .final .fine { margin-top: 22px; font-size: 14px; color: rgba(255,255,255,.45); }
 
-/* Подвал */
-footer { background: var(--ink); color: rgba(255,255,255,.6); padding: 46px 0; font-size: 14px; }
+/* Подвал - сливово-фиолетовый градиент, отличается от тёмно-синего блока CTA */
+footer {
+  background: linear-gradient(180deg, #1B1240 0%, #120C26 100%);
+  border-top: 1px solid rgba(109,61,245,.35);
+  color: rgba(255,255,255,.6); padding: 46px 0; font-size: 14px;
+}
 .footer-grid { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
 footer a { color: rgba(255,255,255,.7); text-decoration: none; }
 footer a:hover { color: var(--white); }
