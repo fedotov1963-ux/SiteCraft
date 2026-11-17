@@ -152,12 +152,30 @@ header.scrolled {
   max-width: 680px; margin: 0 auto;
   background: linear-gradient(120deg, rgba(46,107,255,.16) 0%, rgba(109,61,245,.14) 50%, rgba(46,107,255,.16) 100%);
   background-size: 200% 100%;
-  animation: subflow 7s ease-in-out infinite;
+  animation: subflow 7s ease-in-out infinite,
+             platefloat 6s ease-in-out infinite,
+             plateglow 5s ease-in-out infinite;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,.22);
   border-radius: 16px;
   padding: 13px 22px;
   box-shadow: 0 8px 28px rgba(46,107,255,.18);
+}
+/* плашка слегка парит над фоном */
+@keyframes platefloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+/* мягкое пульсирование свечения и рамки */
+@keyframes plateglow {
+  0%, 100% {
+    box-shadow: 0 8px 28px rgba(46,107,255,.18);
+    border-color: rgba(255,255,255,.22);
+  }
+  50% {
+    box-shadow: 0 12px 36px rgba(109,61,245,.35), 0 0 18px rgba(168,245,58,.12);
+    border-color: rgba(168,245,58,.4);
+  }
 }
 @keyframes subflow {
   0%, 100% { background-position: 0% 0; }
