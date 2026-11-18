@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АвтоДоктор - автосервис с онлайн-записью | Демо-кейс SiteCraft</title>
+<meta name="description" content="Демо-лендинг автосервиса с онлайн-записью. Проект SiteCraft.">
+<style>
+  :root{
+    --navy:#13294b; --orange:#f26b21; --ink:#1c2530; --muted:#5d6b7a;
+    --bg:#f4f6f9; --card:#fff; --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  a{color:var(--orange);text-decoration:none}
+  h2{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .btn{display:inline-block;background:var(--orange);color:#fff;padding:12px 26px;border-radius:10px;font-weight:700;border:none;cursor:pointer;font-size:15px;transition:background .2s}
+  .btn:hover{background:#d5571a}
+  .btn.small{padding:9px 18px;font-size:14px}
+  .btn.ghost{background:#fff;color:var(--orange);border:2px solid var(--orange)}
+
+  header{background:var(--navy);position:sticky;top:0;z-index:10}
+  .header-in{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-size:22px;font-weight:700;color:#fff}
+  .logo span{color:var(--orange)}
+  .header-in a.tel{color:#fff;font-weight:600;margin-right:18px}
+
+  .hero{background:linear-gradient(135deg,#13294b 0%,#1d3a66 100%);color:#fff;padding:72px 0}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .badge{display:inline-block;background:rgba(242,107,33,.18);color:#ffb28c;font-weight:600;padding:6px 14px;border-radius:999px;font-size:13px;margin-bottom:16px}
+  .hero h1{font-size:36px;line-height:1.2;margin-bottom:14px}
+  .hero p.lead{font-size:17px;color:#c4d3e8;margin-bottom:24px}
+  .hero-points{list-style:none;margin-bottom:26px}
+  .hero-points li{padding-left:28px;position:relative;margin-bottom:10px}
+  .hero-points li::before{content:"";position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:3px;background:var(--orange)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13px;color:#8fa5c2;margin-top:12px}
+  .hero-card{background:#fff;color:var(--ink);border-radius:var(--radius);padding:26px;box-shadow:0 14px 34px rgba(0,0,0,.25)}
+  .hero-card h3{font-size:18px;margin-bottom:12px}
+  .hero-card ul{list-style:none;font-size:14px;margin-bottom:16px}
+  .hero-card ul li{padding:7px 0;border-bottom:1px dashed #dde3ea;display:flex;justify-content:space-between}
+  .hero-card ul li:last-child{border-bottom:none}
+  .hero-card ul li b{color:var(--navy)}
+  .hero-card .btn{width:100%;text-align:center}
+
+  .stats{background:var(--orange);color:#fff;padding:32px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center}
+  .stats b{font-size:28px;display:block}
+  .stats span{font-size:13px;opacity:.9}
+
+  section{padding:60px 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:0 6px 18px rgba(28,37,48,.07)}
+  .card .ic{font-size:30px;margin-bottom:10px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--muted);margin-bottom:10px}
+  .card .cost{font-size:19px;font-weight:700;color:var(--navy)}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+  .step{background:#fff;border-radius:var(--radius);padding:22px;counter-increment:step;box-shadow:0 6px 18px rgba(28,37,48,.07)}
+  .step::before{content:counter(step);display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:var(--navy);color:#fff;font-weight:700;margin-bottom:12px}
+  .step h3{font-size:16px;margin-bottom:4px}
+  .step p{font-size:13px;color:var(--muted)}
+
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;font-size:15px;box-shadow:0 6px 18px rgba(28,37,48,.07)}
+  .review .stars{color:#f5a623;letter-spacing:2px;margin-bottom:10px}
+  .review .who{margin-top:14px;font-weight:600;font-size:14px}
+  .review .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  details{background:#fff;border-radius:12px;margin-bottom:12px;padding:0 20px;box-shadow:0 4px 12px rgba(28,37,48,.05)}
+  summary{cursor:pointer;font-weight:600;padding:18px 0;list-style:none;position:relative;padding-right:32px}
+  summary::after{content:"+";position:absolute;right:0;top:14px;font-size:22px;color:var(--orange)}
+  details[open] summary::after{content:"−"}
+  details p{padding:0 0 18px;color:var(--muted)}
+
+  .cta{background:linear-gradient(135deg,var(--navy),#0e1e38);color:#fff}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .cta .sub{color:#9db2cc}
+  form{background:#fff;border-radius:var(--radius);padding:28px;color:var(--ink)}
+  form label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  form input,form select{width:100%;padding:12px 14px;border:1px solid #d4dce6;border-radius:10px;font-size:15px;margin-bottom:16px;font-family:inherit}
+  form input:focus,form select:focus{outline:2px solid var(--orange);border-color:transparent}
+  form .btn{width:100%}
+  form .agree{font-size:12px;color:var(--muted);margin-top:12px;margin-bottom:0}
+
+  footer{background:#0e1a2e;color:#8296b0;padding:26px 0;font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-note{background:var(--orange);color:#fff;text-align:center;padding:8px 12px;font-size:13px;font-weight:600}
+
+  @media(max-width:900px){
+    .hero-grid,.cta-grid{grid-template-columns:1fr}
+    .cards,.reviews{grid-template-columns:1fr}
+    .steps,.stats-grid{grid-template-columns:repeat(2,1fr)}
+    .hero h1{font-size:27px}
+    h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-note">Демо-проект: лендинг создан для портфолио SiteCraft. Автосервис вымышленный, формы не отправляют данные.</div>
+
+<header>
+  <div class="container header-in">
+    <div class="logo">Авто<span>Доктор</span></div>
+    <div>
+      <a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a>
+      <a href="#zapis" class="btn small">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:72px 0">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">Компьютерная диагностика - бесплатно</span>
+      <h1>Ремонт автомобиля без сюрпризов: смета до начала работ</h1>
+      <p class="lead">Ремонтируем японские, корейские и отечественные автомобили. Диагностика бесплатно, запчасти по себестоимости партнёров, гарантия на работы 1 год.</p>
+      <ul class="hero-points">
+        <li>Запись онлайн - заезжайте точно ко времени</li>
+        <li>Фото и видеоотчёты на каждом этапе ремонта</li>
+        <li>Собственная доставка запчастей - без наценок</li>
+      </ul>
+      <div class="hero-cta">
+        <a href="#zapis" class="btn">Записаться на сервис</a>
+        <a href="#prices" class="btn ghost" style="background:transparent;color:#fff;border-color:#5a7398">Прайс-лист</a>
+      </div>
+      <p class="hero-note">Ежедневно 8:00–20:00 · Эвакуатор круглосуточно</p>
+    </div>
+    <div class="hero-card">
+      <h3>Популярные работы</h3>
+      <ul>
+        <li><b>ТО масло+фильтры</b><span>от 4 500 ₽</span></li>
+        <li><b>Диагностика подвески</b><span>бесплатно</span></li>
+        <li><b>Замена тормозных колодок</b><span>от 2 800 ₽</span></li>
+        <li><b>Ремонт двигателя</b><span>по смете</span></li>
+      </ul>
+      <a href="#zapis" class="btn">Записаться на удобное время</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div><b>12 лет</b><span>на рынке автоуслуг</span></div>
+    <div><b>30 000+</b><span>отремонтированных авто</span></div>
+    <div><b>1 год</b><span>гарантия на работы</span></div>
+    <div><b>4.8</b><span>рейтинг на картах</span></div>
+  </div>
+</div>
+
+<section id="prices">
+  <div class="container">
+    <h2>Услуги и цены</h2>
+    <p class="sub">Смету согласовываем до начала работ - цена не вырастет в процессе.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic">🛢</div>
+        <h3>Техническое обслуживание</h3>
+        <p>Замена масла, фильтров, свечей, тормозной жидкости. По регламенту производителя.</p>
+        <div class="cost">от 4 500 ₽</div>
+      </div>
+      <div class="card">
+        <div class="ic">🔧</div>
+        <h3>Ремонт подвески и тормозов</h3>
+        <p>Стойки, шаровые, рычаги, колодки, диски. Бесплатная диагностика ходовой.</p>
+        <div class="cost">от 2 800 ₽</div>
+      </div>
+      <div class="card">
+        <div class="ic">⚙</div>
+        <h3>Ремонт двигателя</h3>
+        <p>Диагностика, капитальный ремонт, замена цепей и ГРМ. Работаем с любой сложностью.</p>
+        <div class="cost">по смете</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e8edf4">
+  <div class="container">
+    <h2>Как проходит ремонт</h2>
+    <p class="sub">Прозрачный процесс - вы всегда знаете, что происходит с вашим автомобилем.</p>
+    <div class="steps">
+      <div class="step"><h3>Запись и диагностика</h3><p>Принимаем авто, проводим бесплатную диагностику.</p></div>
+      <div class="step"><h3>Смета</h3><p>Фиксируем стоимость и сроки до начала работ. Без доплат.</p></div>
+      <div class="step"><h3>Ремонт с отчётами</h3><p>Присылаем фото и видео каждого этапа в мессенджер.</p></div>
+      <div class="step"><h3>Выдача и гарантия</h3><p>Проверяем вместе, оформляем гарантию 1 год на работы.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Отзывы клиентов</h2>
+    <p class="sub">Более 900 отзывов на картах со средней оценкой 4.8.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Гремела подвеска. Сделали диагностику бесплатно, назвали цену сразу, всё починили за день. Прислали фото до и после.»
+        <div class="who">Андрей, Kia Rio<span>Ремонт подвески</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Боялась, как и все, «сюрпризов» в смете. Итоговая сумма совпала с первоначальной до рубля. Рекомендую.»
+        <div class="who">Марина, Hyundai Solaris<span>ТО + тормоза</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        «Записался онлайн, приехал - машину приняли сразу. Ждал в комнате отдыха с кофе. Сделали даже раньше срока.»
+        <div class="who">Сергей, Lada Vesta<span>Замена ГРМ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e8edf4">
+  <div class="container">
+    <h2>Частые вопросы</h2>
+    <p class="sub">Отвечаем на то, о чём спрашивают перед записью.</p>
+    <details>
+      <summary>Диагностика действительно бесплатная?</summary>
+      <p>Да. Первичная диагностика ходовой и компьютерная диагностика - бесплатно. Если потребуется разборка узла для точной сметы, предупредим заранее.</p>
+    </details>
+    <details>
+      <summary>Можно ли привезти свои запчасти?</summary>
+      <p>Можно, установим с гарантией на работу. Но чаще выгоднее наши: закупаем у партнёров по ценам ниже розницы.</p>
+    </details>
+    <details>
+      <summary>Сколько по времени занимает ремонт?</summary>
+      <p>ТО - 1–2 часа, работы по подвеске - обычно в день обращения. Сложный ремонт двигателя - от 2 дней, срок фиксируем в смете.</p>
+    </details>
+  </div>
+</section>
+
+<section class="cta" id="zapis">
+  <div class="container cta-grid">
+    <div>
+      <h2>Запишитесь онлайн - заезжайте точно ко времени</h2>
+      <p class="sub">Оставьте заявку - перезвоним за 15 минут в рабочее время и подберём удобный слот.</p>
+      <ul style="list-style:none">
+        <li style="margin-bottom:10px">✓ Бесплатная диагностика</li>
+        <li style="margin-bottom:10px">✓ Смета до начала работ</li>
+        <li>✓ Гарантия 1 год</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Демо-режим: форма не отправляет данные.');">
+      <label for="name">Ваше имя</label>
+      <input id="name" type="text" placeholder="Иван" required>
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+      <label for="car">Марка и модель авто</label>
+      <input id="car" type="text" placeholder="Kia Rio, 2019" required>
+      <label for="svc">Услуга</label>
+      <select id="svc">
+        <option>Техническое обслуживание</option>
+        <option>Диагностика</option>
+        <option>Ремонт подвески</option>
+        <option>Ремонт двигателя</option>
+        <option>Другое</option>
+      </select>
+      <button class="btn" type="submit">Записаться</button>
+      <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© АвтоДоктор, 2026 · Демо-проект SiteCraft</div>
+    <div>г. Город, ш. Гаражное, 12 · +7 (000) 000-00-00</div>
+  </div>
+</footer>
+
+</body>
+</html>
