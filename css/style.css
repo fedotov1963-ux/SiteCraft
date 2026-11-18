@@ -573,8 +573,19 @@ footer a:hover { color: var(--white); }
     background: var(--ink);
   }
   .tail .final { min-height: 0; padding: 0; scroll-snap-align: none; }
-  .tail footer { scroll-snap-align: none; padding: 0; margin-top: 48px; }
-  .tail .footer-grid { width: 100%; }
+  /* блок с формой компактнее, чтобы подвал получился шире */
+  .tail .final h2 { margin-bottom: 14px; }
+  .tail .final h2 + p { margin: 0 auto 24px; }
+  .tail .final form { margin-bottom: 22px; }
+  .tail .final .fine { margin-top: 16px; }
+  /* подвал - широкая полоса внизу общего экрана */
+  .tail footer {
+    scroll-snap-align: none; margin-top: 40px;
+    padding: 32px 0 30px; font-size: 15px;
+    border-top: 1px solid rgba(255,255,255,.14);
+  }
+  .tail .footer-grid { width: 100%; align-items: flex-start; }
+  .tail .footer-links { gap: 30px; }
 }
 
 /* Плавное появление блоков (всплывают на экране) */
