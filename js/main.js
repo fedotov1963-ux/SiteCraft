@@ -17,12 +17,12 @@ mobileMenu.addEventListener('click', (e) => {
 
 // Калькулятор стоимости сайта
 const TYPES = [
-  { label: 'Лендинг', price: 60000, term: 14 },
-  { label: 'Корпоративный', price: 120000, term: 30 },
-  { label: 'Магазин', price: 200000, term: 45 },
+  { label: 'Визитка', price: 18000, term: 4 },
+  { label: 'Лендинг', price: 28000, term: 6 },
+  { label: 'Лендинг+', price: 42000, term: 10 },
 ];
-const OPT_PRICE = 15000;
-const OPT_TERM_DAYS = 2;
+const OPT_PRICE = 4000;
+const OPT_TERM_DAYS = 1;
 
 const state = { type: 0, opts: 1 };
 const fmt = (n) => n.toLocaleString('ru-RU');
