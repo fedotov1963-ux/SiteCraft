@@ -99,3 +99,46 @@ render();
     go(currentIndex() + 1);
   }, INTERVAL);
 })();
+
+// Плавное появление блоков: всплывают на экране при попадании в зону видимости
+(function reveal() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach((el) => io.observe(el));
+})();
+
+// Форма заявки: отправка на почту через formsubmit.co
+const leadForm = document.getElementById('leadForm');
+if (leadForm) {
+  const status = document.getElementById('formStatus');
+  leadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = 'Отправляем...';
+    const data = Object.fromEntries(new FormData(leadForm).entries());
+    try {
+      const res = await fetch(leadForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      status.className = 'form-status ok';
+      status.textContent = 'Заявка отправлена. Отвечу лично в течение рабочего дня.';
+      leadForm.reset();
+    } catch (err) {
+      status.className = 'form-status err';
+      status.textContent = 'Не получилось отправить. Напишите напрямую в Telegram или на почту.';
+    }
+  });
+}
