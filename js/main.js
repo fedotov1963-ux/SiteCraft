@@ -57,48 +57,8 @@ document.querySelectorAll('.stepper button').forEach((btn) => {
 });
 render();
 
-// Автоматическое плавное перелистывание секций
-(function autoFlip() {
-  // не мешаем людям с настройкой "уменьшить анимацию"
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const ids = ['top', 'steps', 'services', 'cases', 'author', 'pricing', 'faq', 'contacts'];
-  const els = ids.map((id) => document.getElementById(id)).filter(Boolean);
-  if (!els.length) return;
-
-  const INTERVAL = 7000;   // секунда на секцию
-  const PAUSE_AFTER_ACTION = 15000; // пауза после действия пользователя
-  let paused = false;
-  let resumeTimer = null;
-
-  function currentIndex() {
-    const y = window.scrollY + window.innerHeight * 0.4;
-    for (let i = 0; i < els.length; i++) {
-      if (els[i].offsetTop > y) return Math.max(0, i - 1);
-    }
-    return els.length - 1;
-  }
-
-  function go(i) {
-    const next = (i + els.length) % els.length; // в конце - снова наверх
-    els[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function userPause() {
-    paused = true;
-    clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(() => { paused = false; }, PAUSE_AFTER_ACTION);
-  }
-
-  // пользователь листает сам (колесо, касание, клавиши) - даём ему управление
-  ['wheel', 'touchstart', 'keydown'].forEach((ev) =>
-    window.addEventListener(ev, userPause, { passive: true }));
-
-  setInterval(() => {
-    if (paused || document.hidden) return;
-    go(currentIndex() + 1);
-  }, INTERVAL);
-})();
+// Автоперелистывание отключено: страницы плавно всплывают при прокрутке (reveal ниже),
+// а листает только сам пользователь.
 
 // Плавное появление блоков: всплывают на экране при попадании в зону видимости
 (function reveal() {
@@ -140,5 +100,28 @@ if (leadForm) {
       status.className = 'form-status err';
       status.textContent = 'Не получилось отправить. Напишите напрямую в Telegram или на почту.';
     }
+  });
+}
+
+// Кнопка "Смотреть, что входит" ведёт к карточке выбранного в калькуляторе типа сайта
+const calcCta = document.getElementById('calcCta');
+if (calcCta) {
+  calcCta.addEventListener('click', (e) => {
+    e.preventDefault();
+    const cards = document.querySelectorAll('.price-card');
+    const target = cards[state.type];
+    if (!target) return;
+    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // на телефоне карточки листаются горизонтально - подводим нужную к центру
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      const row = document.querySelector('.pricing');
+      const left = target.offsetLeft - (row.clientWidth - target.offsetWidth) / 2;
+      row.scrollTo({ left, behavior: 'smooth' });
+    }
+    cards.forEach((c) => c.classList.remove('flash'));
+    setTimeout(() => {
+      target.classList.add('flash');
+      setTimeout(() => target.classList.remove('flash'), 1800);
+    }, 600);
   });
 }
