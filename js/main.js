@@ -128,6 +128,16 @@ if (leadForm) {
       wrap.style.zoom = Math.max(0.6, ((avail - 2) / contentH).toFixed(3));
     }
   }
+  // надписи-ярлыки секций ("Как работаем", "Цены" и т.д.) - одного
+  // видимого размера на экране независимо от масштаба своей секции
+  function keepLabelSize(wrap) {
+    const lbl = wrap.querySelector('.section-label');
+    if (!lbl) return;
+    lbl.style.fontSize = '';
+    const base = parseFloat(getComputedStyle(lbl).fontSize);
+    const z = parseFloat(wrap.style.zoom) || 1;
+    if (z !== 1) lbl.style.fontSize = (base / z).toFixed(1) + 'px';
+  }
   function fit() {
     const vh = window.innerHeight;
     // сброс ручной ширины блоков (пересчитывается ниже на компьютере)
@@ -148,6 +158,7 @@ if (leadForm) {
         const avail = vh - HEADER - GAP;
         const h = [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0);
         zoomToFit(wrap, h, avail);
+        keepLabelSize(wrap);
       });
       return;
     }
@@ -164,6 +175,7 @@ if (leadForm) {
         ? [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0)
         : outerHeight(wrap);
       zoomToFit(wrap, h, avail);
+      keepLabelSize(wrap);
     });
     // блоки в секциях услуг, автора и цен - той же визуальной ширины,
     // что и блоки кейсов (компенсация разного масштаба секций)
