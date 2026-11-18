@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Химчистка мебели - скидка 40% до конца недели | Демо-кейс SiteCraft</title>
+<meta name="description" content="Демо-акционный лендинг услуги. Проект SiteCraft.">
+<style>
+  :root{
+    --green:#1d9e6c; --green-dark:#157a53; --ink:#1e2a24; --muted:#62716a;
+    --bg:#f4faf7; --card:#fff; --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  a{color:var(--green);text-decoration:none}
+  h2{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .btn{display:inline-block;background:var(--green);color:#fff;padding:14px 30px;border-radius:12px;font-weight:700;border:none;cursor:pointer;font-size:16px;transition:background .2s}
+  .btn:hover{background:var(--green-dark)}
+  .btn.small{padding:9px 18px;font-size:14px}
+  .btn.ghost{background:#fff;color:var(--green);border:2px solid var(--green)}
+
+  header{background:#fff;border-bottom:1px solid #e0ece5;position:sticky;top:0;z-index:10}
+  .header-in{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-size:21px;font-weight:700;color:var(--ink)}
+  .logo span{color:var(--green)}
+  .header-in a.tel{font-weight:700;color:var(--ink)}
+
+  .hero{background:linear-gradient(135deg,#1d9e6c 0%,#27b57e 100%);color:#fff;padding:70px 0}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .hero h1{font-size:36px;line-height:1.2;margin-bottom:16px}
+  .hero p.lead{font-size:18px;color:#dff5ea;margin-bottom:26px}
+  .timer{display:flex;gap:12px;margin-bottom:26px}
+  .timer div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:12px;padding:10px 16px;text-align:center;min-width:74px}
+  .timer b{font-size:26px;display:block}
+  .timer span{font-size:12px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13px;color:#c8ecdb;margin-top:12px}
+  .hero-card{background:#fff;color:var(--ink);border-radius:var(--radius);padding:28px;box-shadow:0 14px 34px rgba(0,0,0,.18)}
+  .hero-card .tag{display:inline-block;background:#ffe9d6;color:#c05f1a;font-weight:700;font-size:13px;padding:5px 14px;border-radius:999px;margin-bottom:12px}
+  .hero-card h3{font-size:18px;margin-bottom:8px}
+  .hero-card .price{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .hero-card .price b{font-size:32px;color:var(--green)}
+  .hero-card .price s{color:var(--muted);font-size:18px}
+  .hero-card ul{list-style:none;font-size:14px;margin-bottom:18px}
+  .hero-card ul li{padding:6px 0;border-bottom:1px dashed #e0ece5}
+  .hero-card ul li:last-child{border-bottom:none}
+  .hero-card .btn{width:100%;text-align:center}
+
+  .stats{background:#157a53;color:#fff;padding:28px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center}
+  .stats b{font-size:26px;display:block}
+  .stats span{font-size:13px;opacity:.85}
+
+  section{padding:60px 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:0 6px 18px rgba(30,42,36,.07)}
+  .card .ic{font-size:30px;margin-bottom:10px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--muted)}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:step}
+  .step{background:#fff;border-radius:var(--radius);padding:24px;counter-increment:step;box-shadow:0 6px 18px rgba(30,42,36,.07)}
+  .step::before{content:counter(step);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;font-weight:700;margin-bottom:12px}
+  .step h3{font-size:16px;margin-bottom:4px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;font-size:15px;box-shadow:0 6px 18px rgba(30,42,36,.07)}
+  .review .stars{color:#f5a623;letter-spacing:2px;margin-bottom:10px}
+  .review .who{margin-top:14px;font-weight:600;font-size:14px}
+  .review .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  .cta{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .cta .sub{color:#c8ecdb}
+  form{background:#fff;border-radius:var(--radius);padding:28px;color:var(--ink)}
+  form label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  form input,form select,form textarea{width:100%;padding:12px 14px;border:1px solid #d5e3db;border-radius:10px;font-size:15px;margin-bottom:16px;font-family:inherit}
+  form input:focus,form select:focus,form textarea:focus{outline:2px solid var(--green);border-color:transparent}
+  form .btn{width:100%}
+  form .agree{font-size:12px;color:var(--muted);margin-top:12px;margin-bottom:0}
+
+  footer{background:#123f2e;color:#8fbfaa;padding:26px 0;font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-note{background:#ffe9d6;color:#8a4413;text-align:center;padding:8px 12px;font-size:13px;font-weight:700}
+
+  @media(max-width:900px){
+    .hero-grid,.cta-grid{grid-template-columns:1fr}
+    .cards,.reviews,.steps{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .hero h1{font-size:28px}
+    h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-note">Демо-проект: акционный лендинг создан для портфолио SiteCraft. Компания вымышленная, формы не отправляют данные.</div>
+
+<header>
+  <div class="container header-in">
+    <div class="logo">Чистый <span>Дом</span></div>
+    <div>
+      <a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a>
+      <a href="#order" class="btn small" style="margin-left:16px">Заказать со скидкой</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:70px 0">
+  <div class="container hero-grid">
+    <div>
+      <h1>Химчистка мебели и ковров со скидкой 40%</h1>
+      <p class="lead">Выезд в день обращения. Профессиональная химия без запаха, сушка 2–4 часа. Диван двухместный - всего 1 990 ₽ вместо 3 500 ₽.</p>
+      <div class="timer" aria-label="До конца акции">
+        <div><b>02</b><span>дня</span></div>
+        <div><b>11</b><span>часов</span></div>
+        <div><b>37</b><span>минут</span></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#order" class="btn" style="background:#fff;color:var(--green)">Заказать по акции</a>
+      </div>
+      <p class="hero-note">Акция действует до воскресения включительно · Выезд по городу бесплатно</p>
+    </div>
+    <div class="hero-card">
+      <span class="tag">Только до конца недели</span>
+      <h3>Диван двухместный</h3>
+      <div class="price"><b>1 990 ₽</b><s>3 500 ₽</s></div>
+      <ul>
+        <li>Предварительная обработка пятен</li>
+        <li>Экстракторная чистка с вытяжкой грязи</li>
+        <li>Антибактериальная обработка</li>
+        <li>Сушка 2–4 часа</li>
+      </ul>
+      <a href="#order" class="btn">Забронировать цену</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div><b>8 лет</b><span>на рынке клининга</span></div>
+    <div><b>15 000+</b><span>почищенных диванов</span></div>
+    <div><b>4.9</b><span>рейтинг на картах</span></div>
+    <div><b>2–4 ч</b><span>сушка после чистки</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <h2>Цены по акции</h2>
+    <p class="sub">Цены действуют при заказе до конца недели. Смета фиксируется до начала работ.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic">🛋</div>
+        <h3>Диван двухместный</h3>
+        <p>Экстракторная чистка, пятновыведение, антибактериальная обработка.</p>
+        <p style="font-size:19px;font-weight:700;color:var(--green);margin-top:10px">1 990 ₽ <s style="color:var(--muted);font-size:14px;font-weight:400">3 500 ₽</s></p>
+      </div>
+      <div class="card">
+        <div class="ic">🛏</div>
+        <h3>Матрас двуспальный</h3>
+        <p>Глубокая чистка с обеззараживанием, удаление пылевых клещей и запахов.</p>
+        <p style="font-size:19px;font-weight:700;color:var(--green);margin-top:10px">2 490 ₽ <s style="color:var(--muted);font-size:14px;font-weight:400">4 200 ₽</s></p>
+      </div>
+      <div class="card">
+        <div class="ic">🪑</div>
+        <h3>Кресло / стул</h3>
+        <p>Деликатная чистка любых тканей и экокожи, сушка ускорителями.</p>
+        <p style="font-size:19px;font-weight:700;color:var(--green);margin-top:10px">990 ₽ <s style="color:var(--muted);font-size:14px;font-weight:400">1 800 ₽</s></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e6f4ed">
+  <div class="container">
+    <h2>Как проходит чистка</h2>
+    <p class="sub">От звонка до сухого дивана - один визит.</p>
+    <div class="steps">
+      <div class="step"><h3>Оставьте заявку</h3><p>Перезвоним за 10 минут, подтвердим цену и время выезда.</p></div>
+      <div class="step"><h3>Выезд и чистка</h3><p>Мастер приедет в оговорённый час с профессиональным оборудованием.</p></div>
+      <div class="step"><h3>Сушка и проверка</h3><p>Чистим вместе с вами: проверяете результат до оплаты.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Отзывы клиентов</h2>
+    <p class="sub">Более 1 100 отзывов со средней оценкой 4.9.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Диван после кота был в ужасном состоянии. После чистки - как новый, запаха нет вообще. Сох за два часа.»
+        <div class="who">Екатерина<span>Чистка дивана</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Заказывал матрас - ребёнок с астмой, вопрос был серьёзный. Сделали антибактериальную обработку, дышится легче.»
+        <div class="who">Руслан<span>Чистка матраса</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        «Приехали даже раньше назначенного. Единственный минус - надо было заказывать два дивана сразу, так выгоднее.»
+        <div class="who">Татьяна<span>Чистка двух кресел</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="order">
+  <div class="container cta-grid">
+    <div>
+      <h2>Успейте заказать по акции −40%</h2>
+      <p class="sub">Оставьте заявку - перезвоним за 10 минут в рабочее время и подтвердим цену.</p>
+      <ul style="list-style:none">
+        <li style="margin-bottom:10px">✓ Выезд сегодня или завтра</li>
+        <li style="margin-bottom:10px">✓ Цена фиксируется до начала работ</li>
+        <li>✓ Результат принимаете до оплаты</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Демо-режим: форма не отправляет данные.');">
+      <label for="name">Ваше имя</label>
+      <input id="name" type="text" placeholder="Иван" required>
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+      <label for="svc">Что почистить</label>
+      <select id="svc">
+        <option>Диван</option>
+        <option>Матрас</option>
+        <option>Кресло / стул</option>
+        <option>Ковёр</option>
+        <option>Несколько вещей</option>
+      </select>
+      <label for="comment">Комментарий</label>
+      <textarea id="comment" rows="3" placeholder="Например: диван угловой, есть пятна от кофе"></textarea>
+      <button class="btn" type="submit">Заказать со скидкой 40%</button>
+      <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© Чистый Дом, 2026 · Демо-проект SiteCraft</div>
+    <div>Выезд по городу · +7 (000) 000-00-00</div>
+  </div>
+</footer>
+
+</body>
+</html>
