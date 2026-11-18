@@ -590,7 +590,9 @@ footer a:hover { color: var(--white); }
   body { font-size: clamp(17px, 1.35vw, 26px); }
   .container { max-width: 1280px; }
   .nav-logo span { font-size: 16px; }
-  .pill { font-size: 17px; }
+  .pill { font-size: 18px; padding: 13px 16px 13px 28px; }
+  .pill .circle { width: 34px; height: 34px; }
+  .pill .circle svg { width: 16px; height: 16px; }
   .section-head { max-width: 840px; margin-bottom: 52px; }
   .section-label { font-size: clamp(17px, 1.3vw, 23px); }
   h2 { font-size: clamp(30px, 3.6vw, 52px); }
@@ -608,7 +610,7 @@ footer a:hover { color: var(--white); }
   .svc h3 { font-size: clamp(19px, 1.5vw, 25px); }
   .svc p { font-size: clamp(16px, 1.25vw, 21px); max-width: none; }
   .svc .tag { grid-column: 2; font-size: clamp(15px, 1.15vw, 19px); padding-top: 8px; }
-  .svc:last-child { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 640px; }
+  .svc:last-child { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: calc(50% - 13px); }
   /* кейсы */
   .case .who { font-size: clamp(15px, 1.1vw, 18px); }
   .case .metric { font-size: clamp(30px, 2.4vw, 42px); }
@@ -749,9 +751,23 @@ footer a:hover { color: var(--white); }
   .final input[type="text"], .final input[type="email"], .final textarea { font-size: 18px; padding: 15px 20px; }
   .final .consent { font-size: 15px; }
   .final .fine { font-size: 16px; }
-  .final form .btn { min-width: 280px; font-size: 17px; padding: 15px 30px; }
-  .final .actions .btn { font-size: 17px; padding: 15px 30px; }
+  .final form .btn { min-width: 360px; font-size: 18px; padding: 17px 34px; }
+  .final .actions .btn { font-size: 18px; padding: 16px 34px; }
   .form-status { font-size: 17px; }
+}
+
+/* Компьютер с невысоким окном: форма с подвалом компактнее, чтобы всё помещалось */
+@media (min-width: 901px) and (max-height: 980px) {
+  .tail { padding: 80px 0 16px; }
+  .tail .final h2 { font-size: clamp(22px, 2.1vw, 32px); margin-bottom: 10px; }
+  .tail .final h2 + p { margin-bottom: 16px; }
+  .tail .final form { gap: 9px; margin-bottom: 14px; }
+  .tail .final input[type="text"], .tail .final input[type="email"], .tail .final textarea { padding: 11px 16px; font-size: 16px; }
+  .tail .final .consent { font-size: 13.5px; }
+  .tail .final form .btn { padding: 13px 28px; min-width: 320px; font-size: 17px; }
+  .tail .final .actions .btn { padding: 12px 26px; font-size: 17px; }
+  .tail .final .fine { margin-top: 10px; font-size: 14px; }
+  .tail footer { margin-top: 22px; padding: 20px 0 16px; font-size: 15.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

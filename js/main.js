@@ -200,7 +200,7 @@ if (leadForm) {
         const avail = vh - GAP - padV(tail);
         const h = outerHeight(fin) + outerHeight(foot);
         if (h > avail) {
-          const z = Math.max(0.6, ((avail - 2) / h).toFixed(3));
+          const z = Math.max(0.5, ((avail - 2) / h).toFixed(3));
           if (fw) fw.style.zoom = z;
           if (gw) gw.style.zoom = z;
         }
