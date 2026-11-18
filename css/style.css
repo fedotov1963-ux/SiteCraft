@@ -586,6 +586,59 @@ footer a:hover { color: var(--white); }
   }
   .tail .footer-grid { width: 100%; align-items: flex-start; }
   .tail .footer-links { gap: 30px; }
+  /* ---------- Крупный текст, соразмерный ширине окна ---------- */
+  body { font-size: clamp(16px, 1.2vw, 23px); }
+  .container { max-width: 1280px; }
+  .nav-logo span { font-size: 15px; }
+  .pill { font-size: 16px; }
+  .section-head { max-width: 780px; margin-bottom: 56px; }
+  .section-label { font-size: clamp(15px, 1.05vw, 19px); }
+  h2 { font-size: clamp(28px, 3.2vw, 46px); }
+  .section-sub { font-size: clamp(15px, 1.15vw, 20px); margin-top: 20px; }
+  /* этапы */
+  .step .num { font-size: 15px; }
+  .step h3 { font-size: clamp(18px, 1.35vw, 23px); }
+  .step p { font-size: clamp(15px, 1.1vw, 19px); }
+  /* услуги - блоки на всю ширину страницы */
+  .svc-list { max-width: none; }
+  .svc h3 { font-size: clamp(18px, 1.35vw, 23px); }
+  .svc p { font-size: clamp(15px, 1.1vw, 19px); max-width: none; }
+  .svc .tag { font-size: 15px; }
+  /* кейсы */
+  .case .who { font-size: clamp(14px, 1vw, 17px); }
+  .case .metric { font-size: clamp(28px, 2.2vw, 38px); }
+  .case .what { font-size: clamp(15px, 1.1vw, 18.5px); }
+  .case .term { font-size: clamp(13px, .95vw, 16px); }
+  .cases-note { font-size: clamp(13px, 1vw, 16.5px); }
+  /* автор - карточка на всю ширину страницы */
+  .author-box { max-width: none; padding: 56px; }
+  .author-box h3 { font-size: clamp(21px, 1.6vw, 27px); }
+  .author-box p { font-size: clamp(15.5px, 1.15vw, 19.5px); }
+  .requisites { font-size: clamp(13.5px, 1vw, 16.5px); }
+  /* цены - карточки шире, текст крупнее */
+  .price-card { padding: 40px 34px; }
+  .price-card h3 { font-size: clamp(18px, 1.3vw, 23px); }
+  .price-card .for { font-size: clamp(14px, 1vw, 17px); }
+  .price { font-size: clamp(24px, 1.9vw, 32px); }
+  .price small { font-size: clamp(13px, .95vw, 16px); }
+  .price-card li { font-size: clamp(14.5px, 1.05vw, 18px); padding: 9px 0 9px 28px; }
+  .price-card li::before { top: 17px; width: 14px; height: 8px; }
+  .price-card .btn { font-size: 16px; padding: 14px 26px; }
+  /* faq */
+  .faq { max-width: 900px; }
+  summary { font-size: clamp(16.5px, 1.25vw, 21px); }
+  details p { font-size: clamp(15px, 1.1vw, 18.5px); max-width: none; }
+  /* форма обратной связи - шире, текст крупнее */
+  .final h2 { max-width: 760px; font-size: clamp(26px, 2.6vw, 40px); }
+  .final p { max-width: 640px; font-size: clamp(15.5px, 1.15vw, 19.5px); }
+  .final form { max-width: 720px; }
+  .final input[type="text"], .final input[type="email"], .final textarea { font-size: 17px; padding: 14px 18px; }
+  .final .consent { font-size: 14px; }
+  .final .fine { font-size: 15px; }
+  .form-status { font-size: 16px; }
+  /* подвал */
+  .tail footer { font-size: 16.5px; }
+  .tail .footer-links { gap: 34px; }
 }
 
 /* Плавное появление блоков (всплывают на экране) */
