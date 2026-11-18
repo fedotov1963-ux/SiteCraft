@@ -590,9 +590,12 @@ footer a:hover { color: var(--white); }
   body { font-size: clamp(17px, 1.35vw, 26px); }
   .container { max-width: 1280px; }
   .nav-logo span { font-size: 16px; }
-  .pill { font-size: 18px; padding: 13px 16px 13px 28px; }
-  .pill .circle { width: 34px; height: 34px; }
-  .pill .circle svg { width: 16px; height: 16px; }
+  .pill {
+    font-size: 19px; padding: 15px 18px 15px 36px;
+    min-width: 300px; justify-content: space-between;
+  }
+  .pill .circle { width: 38px; height: 38px; }
+  .pill .circle svg { width: 17px; height: 17px; }
   .section-head { max-width: 840px; margin-bottom: 52px; }
   .section-label { font-size: clamp(17px, 1.3vw, 23px); }
   h2 { font-size: clamp(30px, 3.6vw, 52px); }
