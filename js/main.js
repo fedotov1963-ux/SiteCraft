@@ -103,6 +103,39 @@ if (leadForm) {
   });
 }
 
+// Гарантия "один блок - один экран": если содержимое секции выше видимой
+// области телефона, аккуратно уменьшаем масштаб, чтобы весь блок (заголовок,
+// текст и кнопки) помещался и не уходил под шапку.
+(function fitSections() {
+  const mobile = window.matchMedia('(max-width: 900px)');
+  const HEADER = 64;   // высота фиксированной шапки с брендом
+  const GAP = 12;      // небольшой воздух снизу экрана
+  // высота элемента с учётом отступов: защита от схлопывания margin
+  function outerHeight(el) {
+    const m = getComputedStyle(el);
+    return el.getBoundingClientRect().height +
+      parseFloat(m.marginTop) + parseFloat(m.marginBottom);
+  }
+  function fit() {
+    document.querySelectorAll('section, footer').forEach((sec) => {
+      const wrap = sec.classList.contains('hero')
+        ? sec.querySelector('.hero-inner')
+        : sec.querySelector(':scope > .container');
+      if (!wrap) return;
+      wrap.style.zoom = '';
+      if (!mobile.matches) return;
+      const avail = window.innerHeight - HEADER - GAP;
+      const h = [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0);
+      if (h > avail) wrap.style.zoom = Math.max(0.6, ((avail - 2) / h).toFixed(3));
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', () => setTimeout(fit, 250));
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+
 // Кнопка "Смотреть, что входит" ведёт к карточке выбранного в калькуляторе типа сайта
 const calcCta = document.getElementById('calcCta');
 if (calcCta) {
