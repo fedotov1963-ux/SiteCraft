@@ -130,6 +130,9 @@ if (leadForm) {
   }
   function fit() {
     const vh = window.innerHeight;
+    // сброс ручной ширины блоков (пересчитывается ниже на компьютере)
+    document.querySelectorAll('#services .svc-list, #author .author-box, #pricing .pricing')
+      .forEach((el) => { el.style.width = ''; el.style.marginLeft = ''; el.style.marginRight = ''; });
     if (mobile.matches) {
       // телефон: каждая секция и подвал целиком на экране
       document.querySelectorAll('section, footer').forEach((sec) => {
@@ -162,6 +165,28 @@ if (leadForm) {
         : outerHeight(wrap);
       zoomToFit(wrap, h, avail);
     });
+    // блоки в секциях услуг, автора и цен - той же визуальной ширины,
+    // что и блоки кейсов (компенсация разного масштаба секций)
+    const refEl = document.querySelector('#cases .cases') || document.querySelector('#cases > .container');
+    const refW = refEl ? refEl.getBoundingClientRect().width : 0;
+    if (refW) {
+      const maxInner = window.innerWidth - 24;
+      [['services', '.svc-list'], ['author', '.author-box'], ['pricing', '.pricing']]
+        .forEach(([id, sel]) => {
+          const sec = document.getElementById(id);
+          const inner = sec && sec.querySelector(sel);
+          const wrap = sec && sec.querySelector(':scope > .container');
+          if (!inner || !wrap) return;
+          const z = parseFloat(wrap.style.zoom) || 1;
+          const w = Math.min(maxInner / z, refW / z);
+          inner.style.width = w + 'px';
+          // браузер не центрирует блок шире контейнера через margin: auto -
+          // задаём отступы явно, чтобы сетка стояла по центру секции
+          const m = (wrap.clientWidth - w) / 2;
+          inner.style.marginLeft = m + 'px';
+          inner.style.marginRight = m + 'px';
+        });
+    }
     // блок с формой заявки + подвал - один общий экран
     const tail = document.querySelector('.tail');
     if (tail) {
