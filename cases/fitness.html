@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Алексей Громов - персональный тренер | Демо-кейс SiteCraft</title>
+<meta name="description" content="Демо-лендинг персонального тренера. Проект SiteCraft.">
+<style>
+  :root{
+    --dark:#14161a; --lime:#b8e62e; --ink:#20242b; --muted:#66707d;
+    --bg:#f6f8f9; --card:#fff; --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  a{color:var(--ink)}
+  h2{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .btn{display:inline-block;background:var(--lime);color:#14161a;padding:13px 28px;border-radius:999px;font-weight:700;border:none;cursor:pointer;font-size:15px}
+  .btn:hover{filter:brightness(.95)}
+  .btn.small{padding:9px 18px;font-size:14px}
+  .btn.ghost{background:transparent;color:#fff;border:2px solid var(--lime)}
+
+  header{background:var(--dark);position:sticky;top:0;z-index:10}
+  .header-in{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-size:20px;font-weight:700;color:#fff}
+  .logo span{color:var(--lime)}
+  nav a{color:#b6bdc7;margin-left:22px;font-size:15px}
+  nav a:hover{color:#fff}
+
+  .hero{background:radial-gradient(1200px 500px at 70% 0%,#262b33 0%,#14161a 60%);color:#fff;padding:76px 0}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+  .hero h1{font-size:38px;line-height:1.15;margin-bottom:16px}
+  .hero h1 span{color:var(--lime)}
+  .hero p.lead{font-size:18px;color:#aab2bd;margin-bottom:24px}
+  .hero-points{list-style:none;margin-bottom:28px}
+  .hero-points li{padding-left:28px;position:relative;margin-bottom:10px}
+  .hero-points li::before{content:"";position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:50%;background:var(--lime)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13px;color:#7d8794;margin-top:12px}
+  .hero-card{background:linear-gradient(150deg,#b8e62e,#8fc41c);color:#14161a;border-radius:var(--radius);padding:30px;text-align:center;font-weight:600}
+  .hero-card .big{font-size:44px;font-weight:800;display:block}
+  .hero-card p{font-size:15px;margin-top:8px}
+
+  .stats{background:var(--dark);color:#fff;padding:30px 0;border-top:1px solid #262b33}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center}
+  .stats b{font-size:26px;display:block;color:var(--lime)}
+  .stats span{font-size:13px;color:#aab2bd}
+
+  section{padding:60px 0}
+  .programs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .program{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 6px 18px rgba(32,36,43,.07);display:flex;flex-direction:column}
+  .program h3{font-size:19px;margin-bottom:8px}
+  .program p{font-size:14px;color:var(--muted);flex:1}
+  .program ul{list-style:none;margin:16px 0;font-size:14px}
+  .program ul li{padding:6px 0;border-bottom:1px dashed #e4e8ec}
+  .program ul li:last-child{border-bottom:none}
+  .program .cost{font-size:22px;font-weight:800;margin-bottom:14px}
+  .program .btn{width:100%;text-align:center}
+  .program.hot{background:var(--dark);color:#fff}
+  .program.hot p{color:#aab2bd}
+  .program.hot ul li{border-color:#333a44}
+  .program.hot .cost{color:var(--lime)}
+  .program .tag{display:inline-block;background:var(--lime);color:#14161a;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:12px;align-self:flex-start}
+
+  .results{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .result{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:0 6px 18px rgba(32,36,43,.07);font-size:15px}
+  .result .nums{display:flex;gap:24px;margin-bottom:12px}
+  .result .nums div b{font-size:20px;display:block}
+  .result .nums div span{font-size:12px;color:var(--muted)}
+  .result .who{font-weight:600;font-size:14px;margin-top:12px}
+  .result .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;font-size:15px;box-shadow:0 6px 18px rgba(32,36,43,.07)}
+  .review .stars{color:#f5a623;letter-spacing:2px;margin-bottom:10px}
+  .review .who{margin-top:14px;font-weight:600;font-size:14px}
+  .review .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  details{background:#fff;border-radius:12px;margin-bottom:12px;padding:0 20px;box-shadow:0 4px 12px rgba(32,36,43,.05)}
+  summary{cursor:pointer;font-weight:600;padding:18px 0;list-style:none;position:relative;padding-right:32px}
+  summary::after{content:"+";position:absolute;right:0;top:14px;font-size:22px;color:var(--ink)}
+  details[open] summary::after{content:"−"}
+  details p{padding:0 0 18px;color:var(--muted)}
+
+  .cta{background:var(--dark);color:#fff}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .cta .sub{color:#aab2bd}
+  form{background:#fff;border-radius:var(--radius);padding:28px;color:var(--ink)}
+  form label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  form input,form select{width:100%;padding:12px 14px;border:1px solid #d7dde3;border-radius:10px;font-size:15px;margin-bottom:16px;font-family:inherit}
+  form input:focus,form select:focus{outline:2px solid var(--lime);border-color:transparent}
+  form .btn{width:100%}
+  form .agree{font-size:12px;color:var(--muted);margin-top:12px;margin-bottom:0}
+
+  footer{background:#0d0f12;color:#7d8794;padding:26px 0;font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-note{background:var(--lime);color:#14161a;text-align:center;padding:8px 12px;font-size:13px;font-weight:700}
+
+  @media(max-width:900px){
+    .hero-grid,.cta-grid{grid-template-columns:1fr}
+    .programs,.results,.reviews{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .hero h1{font-size:29px}
+    h2{font-size:24px}
+    nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-note">Демо-проект: лендинг создан для портфолио SiteCraft. Тренер вымышленный, формы не отправляют данные.</div>
+
+<header>
+  <div class="container header-in">
+    <div class="logo">АЛЕКСЕЙ <span>ГРОМОВ</span></div>
+    <nav>
+      <a href="#programs">Программы</a>
+      <a href="#results">Результаты</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a href="#trial" class="btn small">Пробная тренировка</a>
+  </div>
+</header>
+
+<section class="hero" style="padding:76px 0">
+  <div class="container hero-grid">
+    <div>
+      <h1>Минус 10 кг за 3 месяца <span>без голодовок и изнурения</span></h1>
+      <p class="lead">Персональные тренировки и питание под ваш ритм жизни. Первое занятие - бесплатно: проверим технику и составим план.</p>
+      <ul class="hero-points">
+        <li>12 лет опыта, 500+ преображений</li>
+        <li>Тренировки в зале, онлайн или на улице</li>
+        <li>Поддержка в мессенджере 7 дней в неделю</li>
+      </ul>
+      <div class="hero-cta">
+        <a href="#trial" class="btn">Записаться на пробную</a>
+        <a href="#programs" class="btn ghost">Программы и цены</a>
+      </div>
+      <p class="hero-note">Зал «Атлет» в центре города · Онлайн - из любой точки мира</p>
+    </div>
+    <div class="hero-card">
+      <span class="big">−10 кг</span>
+      <p>средний результат моих клиентов за 3 месяца работы. Без жёстких диет.</p>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div><b>12 лет</b><span>в фитнесе</span></div>
+    <div><b>500+</b><span>клиентов изменились</span></div>
+    <div><b>94%</b><span>доходят до цели</span></div>
+    <div><b>4.9</b><span>рейтинг на картах</span></div>
+  </div>
+</div>
+
+<section id="programs">
+  <div class="container">
+    <h2>Программы тренировок</h2>
+    <p class="sub">Подбираем формат под вашу цель, график и уровень подготовки.</p>
+    <div class="programs">
+      <div class="program">
+        <h3>Онлайн</h3>
+        <p>Программа питания и тренировок, еженедельные корректировки, связь в мессенджере.</p>
+        <ul>
+          <li>План питания под ваш вкус</li>
+          <li>Видео-техника упражнений</li>
+          <li>Отчёт и корректировка каждую неделю</li>
+        </ul>
+        <div class="cost">12 000 ₽ / мес</div>
+        <a href="#trial" class="btn">Начать</a>
+      </div>
+      <div class="program hot">
+        <span class="tag">Выбирают чаще</span>
+        <h3>Персональные</h3>
+        <p>Индивидуальные тренировки в зале с моим сопровождением на каждом подходе.</p>
+        <ul>
+          <li>3–4 тренировки в неделю</li>
+          <li>Контроль техники и нагрузки</li>
+          <li>Диагностика и замеры каждые 2 недели</li>
+        </ul>
+        <div class="cost">18 000 ₽ / мес</div>
+        <a href="#trial" class="btn">Начать</a>
+      </div>
+      <div class="program">
+        <h3>Турбо-старт</h3>
+        <p>Интенсивный формат для тех, у кого мало времени: 8 недель до видимого результата.</p>
+        <ul>
+          <li>Плотный график, короткие сессии</li>
+          <li>Питание с готовыми рационами</li>
+          <li>Ежедневная поддержка</li>
+        </ul>
+        <div class="cost">35 000 ₽</div>
+        <a href="#trial" class="btn">Начать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results" style="background:#eceff1">
+  <div class="container">
+    <h2>Результаты клиентов</h2>
+    <p class="sub">Примеры из практики - при соблюдении плана.</p>
+    <div class="results">
+      <div class="result">
+        <div class="nums"><div><b>92 → 78 кг</b><span>за 4 месяца</span></div><div><b>−14 кг</b><span>вес</span></div></div>
+        «Не верил, что смогу без жёстких диет. Ем всё, только по плану - и худею.»
+        <div class="who">Дмитрий, 38 лет<span>Программа «Персональные»</span></div>
+      </div>
+      <div class="result">
+        <div class="nums"><div><b>−12 кг</b><span>за 3 месяца</span></div><div><b>−18 см</b><span>в талии</span></div></div>
+        «После родов не получалось прийти в форму. Алексей собрал щадящий план под график с ребёнком.»
+        <div class="who">Анна, 31 год<span>Программа «Онлайн»</span></div>
+      </div>
+      <div class="result">
+        <div class="nums"><div><b>+9 кг</b><span>за 5 месяцев</span></div><div><b>+30 кг</b><span>в становой тяге</span></div></div>
+        «Худой всю жизнь. Набрал мышцы без «химии» - просто план и дисциплина.»
+        <div class="who">Иван, 26 лет<span>Программа «Турбо-старт»</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <h2>Отзывы</h2>
+    <p class="sub">150+ отзывов со средней оценкой 4.9.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Пробовала фитнес-приложения - всё бросала. Здесь тренер ждёт тебя на тренировке, и неудобно не прийти.»
+        <div class="who">Ольга<span>Минус 11 кг за 4 месяца</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Онлайн-формат сначала сомневался. Но видео-разборы техники и еженедельные правки делают своё - минус 8 кг.»
+        <div class="who">Кирилл<span>Онлайн-программа</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        «Требовательный, но справедливый. Первые две недели тяжело, потом входишь в ритм и результат мотивирует.»
+        <div class="who">Марина<span>Персональные тренировки</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#eceff1">
+  <div class="container">
+    <h2>Частые вопросы</h2>
+    <p class="sub">Отвечаю на то, о чём спрашивают перед стартом.</p>
+    <details>
+      <summary>Я никогда не тренировался. Подойдёт ли программа?</summary>
+      <p>Да. Начинаем с диагностики и базовой техники, нагрузку наращиваем постепенно. 60% моих клиентов приходят с нулевым опытом.</p>
+    </details>
+    <details>
+      <summary>Придётся ли сидеть на жёсткой диете?</summary>
+      <p>Нет. Питание строим на ваших привычках: убираем лишнее, добавляем нужное. Жёсткие запреты дают срывы - поэтому их нет.</p>
+    </details>
+    <details>
+      <summary>Сколько раз в неделю нужно тренироваться?</summary>
+      <p>Минимум 3 сессии по 45–60 минут. Онлайн-формат допускает 2 домашние тренировки + 1 прогулка.</p>
+    </details>
+    <details>
+      <summary>Что такое пробная тренировка?</summary>
+      <p>Бесплатное занятие 40 минут: смотрим технику, замеры, обсуждаем цель. После него решаете, готовы ли начать. Никаких обязательств.</p>
+    </details>
+  </div>
+</section>
+
+<section class="cta" id="trial">
+  <div class="container cta-grid">
+    <div>
+      <h2>Запишитесь на бесплатную пробную тренировку</h2>
+      <p class="sub">Оставьте заявку - перезвоню в течение часа в рабочее время и подберём удобный слот.</p>
+      <ul style="list-style:none">
+        <li style="margin-bottom:10px">✓ Диагностика и замеры - бесплатно</li>
+        <li style="margin-bottom:10px">✓ План под вашу цель - на первой встрече</li>
+        <li>✓ Никаких обязательств после пробной</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Демо-режим: форма не отправляет данные.');">
+      <label for="name">Ваше имя</label>
+      <input id="name" type="text" placeholder="Иван" required>
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+      <label for="goal">Ваша цель</label>
+      <select id="goal">
+        <option>Похудеть</option>
+        <option>Набрать мышечную массу</option>
+        <option>Прийти в тонус</option>
+        <option>Вернуть форму после перерыва</option>
+      </select>
+      <button class="btn" type="submit">Записаться</button>
+      <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© Алексей Громов, 2026 · Демо-проект SiteCraft</div>
+    <div>Зал «Атлет», г. Город · +7 (000) 000-00-00</div>
+  </div>
+</footer>
+
+</body>
+</html>
