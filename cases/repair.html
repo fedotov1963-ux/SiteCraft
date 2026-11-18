@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мастер на все руки - сантехник и электрик | Демо-кейс SiteCraft</title>
+<meta name="description" content="Демо-сайт-визитка мастера по ремонту. Проект SiteCraft.">
+<style>
+  :root{
+    --blue:#155e86; --yellow:#f7b500; --ink:#1d2b36; --muted:#5f6f7d;
+    --bg:#f5f8fa; --card:#fff; --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  a{color:var(--blue);text-decoration:none}
+  h2{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .btn{display:inline-block;background:var(--yellow);color:var(--ink);padding:13px 28px;border-radius:12px;font-weight:700;border:none;cursor:pointer;font-size:15px;transition:filter .2s}
+  .btn:hover{filter:brightness(.94)}
+  .btn.small{padding:9px 18px;font-size:14px}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+
+  header{background:#fff;border-bottom:1px solid #e2e9ef;position:sticky;top:0;z-index:10}
+  .header-in{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-size:21px;font-weight:700;color:var(--blue)}
+  .header-in a.tel{font-weight:700;color:var(--ink);font-size:17px}
+
+  .hero{background:linear-gradient(140deg,#155e86 0%,#1d7bab 100%);color:#fff;padding:70px 0}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .hero h1{font-size:36px;line-height:1.2;margin-bottom:14px}
+  .hero p.lead{font-size:17px;color:#d6e8f2;margin-bottom:24px}
+  .hero-points{list-style:none;margin-bottom:26px}
+  .hero-points li{padding-left:28px;position:relative;margin-bottom:10px}
+  .hero-points li::before{content:"";position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:4px;background:var(--yellow)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13px;color:#a9cbe0;margin-top:12px}
+  .hero-card{background:#fff;color:var(--ink);border-radius:var(--radius);padding:26px;box-shadow:0 14px 32px rgba(0,0,0,.18)}
+  .hero-card h3{font-size:18px;margin-bottom:8px}
+  .hero-card .price{font-size:30px;font-weight:700;color:var(--blue);margin-bottom:12px}
+  .hero-card p{font-size:14px;color:var(--muted);margin-bottom:16px}
+
+  .stats{background:var(--yellow);color:var(--ink);padding:28px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
+  .stats b{font-size:26px;display:block}
+  .stats span{font-size:13px}
+
+  section{padding:60px 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:0 6px 18px rgba(29,43,54,.07)}
+  .card .ic{font-size:30px;margin-bottom:10px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--muted);margin-bottom:10px}
+  .card .cost{font-size:17px;font-weight:700;color:var(--blue)}
+
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .why-item{background:#fff;border-radius:var(--radius);padding:22px;box-shadow:0 6px 18px rgba(29,43,54,.07);display:flex;gap:16px}
+  .why-item .n{flex:0 0 40px;width:40px;height:40px;border-radius:12px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+  .why-item b{display:block;margin-bottom:4px}
+  .why-item p{font-size:14px;color:var(--muted)}
+
+  .steps{counter-reset:step;background:#eaf2f7}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:#fff;border-radius:var(--radius);padding:24px;counter-increment:step;box-shadow:0 6px 18px rgba(29,43,54,.07)}
+  .step::before{content:counter(step);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--yellow);color:var(--ink);font-weight:700;margin-bottom:12px}
+  .step h3{font-size:16px;margin-bottom:4px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;font-size:15px;box-shadow:0 6px 18px rgba(29,43,54,.07)}
+  .review .stars{color:#f5a623;letter-spacing:2px;margin-bottom:10px}
+  .review .who{margin-top:14px;font-weight:600;font-size:14px}
+  .review .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  .cta{background:var(--ink);color:#fff}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .cta .sub{color:#9db0bf}
+  form{background:#fff;border-radius:var(--radius);padding:28px;color:var(--ink)}
+  form label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  form input,form select,form textarea{width:100%;padding:12px 14px;border:1px solid #d3dde5;border-radius:10px;font-size:15px;margin-bottom:16px;font-family:inherit}
+  form input:focus,form select:focus,form textarea:focus{outline:2px solid var(--blue);border-color:transparent}
+  form .btn{width:100%}
+  form .agree{font-size:12px;color:var(--muted);margin-top:12px;margin-bottom:0}
+
+  footer{background:#14222c;color:#8ba0af;padding:26px 0;font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-note{background:var(--yellow);color:var(--ink);text-align:center;padding:8px 12px;font-size:13px;font-weight:700}
+
+  @media(max-width:900px){
+    .hero-grid,.cta-grid,.why{grid-template-columns:1fr}
+    .cards,.reviews,.steps-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr}
+    .hero h1{font-size:28px}
+    h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-note">Демо-проект: сайт-визитка создан для портфолио SiteCraft. Мастер вымышленный, формы не отправляют данные.</div>
+
+<header>
+  <div class="container header-in">
+    <div class="logo">🔧 Мастер на все руки</div>
+    <div>
+      <a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a>
+      <a href="#zapis" class="btn small" style="margin-left:16px">Вызвать мастера</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:70px 0">
+  <div class="container hero-grid">
+    <div>
+      <h1>Сантехник и электрик. Приеду за 40 минут</h1>
+      <p class="lead">Протечки, розетки, смесители, замки, мебель. Работаю один, поэтому отвечаю за каждый шов лично - гарантия на работу 1 год.</p>
+      <ul class="hero-points">
+        <li>Честный выезд: сначала называю цену - потом берусь за дело</li>
+        <li>Инструмент и расходники с собой - ничего докупать не придётся</li>
+        <li>Убираю за собой - оставляю чисто</li>
+      </ul>
+      <div class="hero-cta">
+        <a href="#zapis" class="btn">Вызвать мастера</a>
+        <a href="#prices" class="btn ghost" style="background:transparent;color:#fff;border-color:#6aa5c4">Прайс-лист</a>
+      </div>
+      <p class="hero-note">Ежедневно 8:00–22:00, без выходных · Выезд по городу - бесплатно</p>
+    </div>
+    <div class="hero-card">
+      <h3>Вызов мастера</h3>
+      <div class="price">от 1 500 ₽</div>
+      <p>Диагностика и точная смета - бесплатно. Оплата после приёмки работ.</p>
+      <a href="#zapis" class="btn" style="width:100%;text-align:center">Оставить заявку</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div><b>14 лет</b><span>опыта в ремонте</span></div>
+    <div><b>8 000+</b><span>выполненных работ</span></div>
+    <div><b>1 год</b><span>гарантия на работы</span></div>
+  </div>
+</div>
+
+<section id="prices">
+  <div class="container">
+    <h2>Услуги и цены</h2>
+    <p class="sub">Мелкий ремонт - по фиксированному прайсу, сложные работы - смета до начала.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic">🚰</div>
+        <h3>Сантехника</h3>
+        <p>Смесители, трубы, сифоны, бачки, протечки, установка сантехники.</p>
+        <div class="cost">от 1 500 ₽</div>
+      </div>
+      <div class="card">
+        <div class="ic">💡</div>
+        <h3>Электрика</h3>
+        <p>Розетки, выключатели, люстры, автоматы, поиск неисправностей.</p>
+        <div class="cost">от 1 200 ₽</div>
+      </div>
+      <div class="card">
+        <div class="ic">🚪</div>
+        <h3>Мебель и замки</h3>
+        <p>Сборка мебели, регулировка дверей, замена замков и ручек.</p>
+        <div class="cost">от 1 000 ₽</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Почему ко мне возвращаются</h2>
+    <p class="sub">Работаю один - поэтому отвечаю за результат лично.</p>
+    <div class="why">
+      <div class="why-item"><div class="n">1</div><div><b>Цена до начала работ</b><p>Называю стоимость после осмотра и не меняю её в процессе. Доплаты - только если вы сами добавили задачу.</p></div></div>
+      <div class="why-item"><div class="n">2</div><div><b>Фотоотчёт</b><p>Присылаю фото до и после в мессенджер - удобно, если заказываете за родителей или в съёмную квартиру.</p></div></div>
+      <div class="why-item"><div class="n">3</div><div><b>Гарантия 1 год</b><p>Если что-то пойдёт не так по моей вине - приеду и исправлю бесплатно.</p></div></div>
+      <div class="why-item"><div class="n">4</div><div><b>Чистота</b><p>Работаю с пылесосом и строительным пылесосом. Убираю упаковку и мусор за собой.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="container">
+    <h2>Как заказать</h2>
+    <p class="sub">От заявки до готовой работы - три простых шага.</p>
+    <div class="steps-grid">
+      <div class="step"><h3>Оставьте заявку</h3><p>Опишите проблему в форме или позвоните - подскажу по телефону.</p></div>
+      <div class="step"><h3>Смета и работа</h3><p>Приезжаю, называю цену, приступаю сразу после вашего согласия.</p></div>
+      <div class="step"><h3>Приёмка</h3><p>Проверяете вместе со мной, оплачиваете. Гарантия - год.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Отзывы заказчиков</h2>
+    <p class="sub">Большинство клиентов - по рекомендации соседей и друзей.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Прорвало трубу в воскресенье вечером. Приехал через час, всё переклеил, мусор убрал. Спас!»
+        <div class="who">Галина<span>Устранение протечки</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Собрал шкаф-купе и повесил люстру. Всё по делу, без лишних разговоров, цена как договаривались.»
+        <div class="who">Олег<span>Сборка мебели</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        «Заказывала за маму - мастер прислал фото до и после, сама не ездила. Очень удобно.»
+        <div class="who">Светлана<span>Замена смесителя</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="zapis">
+  <div class="container cta-grid">
+    <div>
+      <h2>Опишите проблему - назову цену сразу</h2>
+      <p class="sub">Оставьте заявку - перезвоню за 10 минут в рабочее время. Срочный выезд - без наценки.</p>
+      <ul style="list-style:none">
+        <li style="margin-bottom:10px">✓ Выезд бесплатно</li>
+        <li style="margin-bottom:10px">✓ Смета до начала работ</li>
+        <li>✓ Гарантия 1 год</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Демо-режим: форма не отправляет данные.');">
+      <label for="name">Ваше имя</label>
+      <input id="name" type="text" placeholder="Иван" required>
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+      <label for="svc">Что нужно сделать</label>
+      <select id="svc">
+        <option>Сантехника</option>
+        <option>Электрика</option>
+        <option>Мебель и замки</option>
+        <option>Другое</option>
+      </select>
+      <label for="comment">Описание проблемы</label>
+      <textarea id="comment" rows="3" placeholder="Например: капает смеситель на кухне"></textarea>
+      <button class="btn" type="submit">Вызвать мастера</button>
+      <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© Мастер на все руки, 2026 · Демо-проект SiteCraft</div>
+    <div>Выезд по городу · +7 (000) 000-00-00</div>
+  </div>
+</footer>
+
+</body>
+</html>
