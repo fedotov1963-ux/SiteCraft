@@ -104,11 +104,12 @@ if (leadForm) {
 }
 
 // Гарантия "один блок - один экран": если содержимое секции выше видимой
-// области телефона, аккуратно уменьшаем масштаб, чтобы весь блок (заголовок,
+// области, аккуратно уменьшаем масштаб, чтобы весь блок (заголовок,
 // текст и кнопки) помещался и не уходил под шапку.
+// На компьютере блок с формой заявки и подвал считаются одним целым.
 (function fitSections() {
   const mobile = window.matchMedia('(max-width: 900px)');
-  const HEADER = 64;   // высота фиксированной шапки с брендом
+  const HEADER = 64;   // высота фиксированной шапки с брендом (телефон)
   const GAP = 12;      // небольшой воздух снизу экрана
   // высота элемента с учётом отступов: защита от схлопывания margin
   function outerHeight(el) {
@@ -116,22 +117,70 @@ if (leadForm) {
     return el.getBoundingClientRect().height +
       parseFloat(m.marginTop) + parseFloat(m.marginBottom);
   }
+  // вертикальные отступы и рамки самого блока
+  function padV(el) {
+    const m = getComputedStyle(el);
+    return parseFloat(m.paddingTop) + parseFloat(m.paddingBottom) +
+      parseFloat(m.borderTopWidth) + parseFloat(m.borderBottomWidth);
+  }
+  function zoomToFit(wrap, contentH, avail) {
+    if (contentH > avail) {
+      wrap.style.zoom = Math.max(0.6, ((avail - 2) / contentH).toFixed(3));
+    }
+  }
   function fit() {
-    document.querySelectorAll('section, footer').forEach((sec) => {
-      const wrap = sec.classList.contains('hero')
-        ? sec.querySelector('.hero-inner')
-        : sec.querySelector(':scope > .container');
+    const vh = window.innerHeight;
+    if (mobile.matches) {
+      // телефон: каждая секция и подвал целиком на экране
+      document.querySelectorAll('section, footer').forEach((sec) => {
+        const wrap = sec.classList.contains('hero')
+          ? sec.querySelector('.hero-inner')
+          : sec.querySelector(':scope > .container');
+        sec.style.minHeight = '';
+        if (wrap) wrap.style.zoom = '';
+        if (!wrap) return;
+        // JS-замена 100svh: innerHeight - это реальная видимая высота экрана,
+        // работает даже в браузерах без поддержки svh (Samsung Internet и др.)
+        sec.style.minHeight = vh + 'px';
+        const avail = vh - HEADER - GAP;
+        const h = [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0);
+        zoomToFit(wrap, h, avail);
+      });
+      return;
+    }
+    // компьютер: каждая секция - один экран, контент с отступами секции
+    document.querySelectorAll('section').forEach((sec) => {
+      if (sec.closest('.tail')) return;
+      const isHero = sec.classList.contains('hero');
+      const wrap = isHero ? sec.querySelector('.hero-inner') : sec.querySelector(':scope > .container');
+      sec.style.minHeight = vh + 'px';
       if (!wrap) return;
       wrap.style.zoom = '';
-      sec.style.minHeight = '';
-      if (!mobile.matches) return;
-      // JS-замена 100svh: innerHeight - это реальная видимая высота экрана,
-      // работает даже в браузерах без поддержки svh (Samsung Internet и др.)
-      sec.style.minHeight = window.innerHeight + 'px';
-      const avail = window.innerHeight - HEADER - GAP;
-      const h = [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0);
-      if (h > avail) wrap.style.zoom = Math.max(0.6, ((avail - 2) / h).toFixed(3));
+      const avail = vh - GAP - padV(sec) - (isHero ? padV(wrap) : 0);
+      const h = isHero
+        ? [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0)
+        : outerHeight(wrap);
+      zoomToFit(wrap, h, avail);
     });
+    // блок с формой заявки + подвал - один общий экран
+    const tail = document.querySelector('.tail');
+    if (tail) {
+      const fin = tail.querySelector('section.final');
+      const foot = tail.querySelector('footer');
+      const fw = fin ? fin.querySelector(':scope > .container') : null;
+      const gw = foot ? foot.querySelector('.footer-grid') : null;
+      tail.style.minHeight = vh + 'px';
+      [fw, gw].forEach((w) => { if (w) w.style.zoom = ''; });
+      if (fin && foot) {
+        const avail = vh - GAP - padV(tail);
+        const h = outerHeight(fin) + outerHeight(foot);
+        if (h > avail) {
+          const z = Math.max(0.6, ((avail - 2) / h).toFixed(3));
+          if (fw) fw.style.zoom = z;
+          if (gw) gw.style.zoom = z;
+        }
+      }
+    }
   }
   fit();
   window.addEventListener('resize', fit);
