@@ -123,7 +123,11 @@ if (leadForm) {
         : sec.querySelector(':scope > .container');
       if (!wrap) return;
       wrap.style.zoom = '';
+      sec.style.minHeight = '';
       if (!mobile.matches) return;
+      // JS-замена 100svh: innerHeight - это реальная видимая высота экрана,
+      // работает даже в браузерах без поддержки svh (Samsung Internet и др.)
+      sec.style.minHeight = window.innerHeight + 'px';
       const avail = window.innerHeight - HEADER - GAP;
       const h = [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0);
       if (h > avail) wrap.style.zoom = Math.max(0.6, ((avail - 2) / h).toFixed(3));
