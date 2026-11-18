@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кофейня «Зерно» - меню и доставка | Демо-кейс SiteCraft</title>
+<meta name="description" content="Демо-лендинг кофейни с меню и доставкой. Проект SiteCraft.">
+<style>
+  :root{
+    --brown:#4b3226; --cream:#f7f1e8; --accent:#c0763b; --ink:#2d2119;
+    --muted:#8a7566; --card:#fff; --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  a{color:var(--accent);text-decoration:none}
+  h2{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 26px;border-radius:999px;font-weight:700;border:none;cursor:pointer;font-size:15px;transition:background .2s}
+  .btn:hover{background:#a5602c}
+  .btn.small{padding:9px 18px;font-size:14px}
+  .btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+
+  header{background:var(--cream);border-bottom:1px solid #e6dccd;position:sticky;top:0;z-index:10}
+  .header-in{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-size:22px;font-weight:700;color:var(--brown)}
+  .logo span{color:var(--accent)}
+  nav a{color:var(--muted);margin-left:22px;font-size:15px}
+  nav a:hover{color:var(--ink)}
+
+  .hero{background:linear-gradient(150deg,#4b3226 0%,#6b4a35 100%);color:var(--cream);padding:76px 0}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .hero h1{font-size:38px;line-height:1.2;margin-bottom:16px}
+  .hero h1 span{color:var(--gold,#e8b04b)}
+  .hero p.lead{font-size:18px;color:#e2d5c4;margin-bottom:26px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-note{margin-top:16px;font-size:14px;color:#c9b8a3}
+  .hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:30px;text-align:center}
+  .hero-card .big{font-size:46px;font-weight:700;color:#e8b04b}
+  .hero-card p{color:#e2d5c4;margin-top:8px;font-size:15px}
+
+  .stats{background:#e8b04b;color:var(--brown);padding:28px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
+  .stats b{font-size:26px;display:block}
+  .stats span{font-size:13px}
+
+  section{padding:60px 0}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 36px}
+  .menu-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px dashed #d8cbbb}
+  .menu-item b{font-size:16px}
+  .menu-item .desc{display:block;font-size:13px;color:var(--muted);font-weight:400}
+  .menu-item .cost{font-size:17px;font-weight:700;color:var(--accent);white-space:nowrap}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:0 6px 18px rgba(45,33,25,.08)}
+  .card .ic{font-size:30px;margin-bottom:10px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--muted)}
+
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;font-size:15px;box-shadow:0 6px 18px rgba(45,33,25,.08)}
+  .review .stars{color:#e8b04b;letter-spacing:2px;margin-bottom:10px}
+  .review .who{margin-top:14px;font-weight:600;font-size:14px}
+  .review .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  .cta{background:var(--brown);color:var(--cream)}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .cta .sub{color:#c9b8a3}
+  form{background:#fff;border-radius:var(--radius);padding:28px;color:var(--ink)}
+  form label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  form input,form select,form textarea{width:100%;padding:12px 14px;border:1px solid #ddd0bf;border-radius:10px;font-size:15px;margin-bottom:16px;font-family:inherit}
+  form input:focus,form select:focus,form textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+  form .btn{width:100%}
+  form .agree{font-size:12px;color:var(--muted);margin-top:12px;margin-bottom:0}
+
+  footer{background:#33241a;color:#a08b78;padding:26px 0;font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-note{background:#e8b04b;color:var(--brown);text-align:center;padding:8px 12px;font-size:13px;font-weight:700}
+
+  @media(max-width:900px){
+    .hero-grid,.cta-grid{grid-template-columns:1fr}
+    .cards,.reviews{grid-template-columns:1fr}
+    .menu-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr}
+    .hero h1{font-size:29px}
+    h2{font-size:24px}
+    nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-note">Демо-проект: лендинг создан для портфолио SiteCraft. Кофейня вымышленная, формы не отправляют данные.</div>
+
+<header>
+  <div class="container header-in">
+    <div class="logo">Кофейня <span>«Зерно»</span></div>
+    <nav>
+      <a href="#menu">Меню</a>
+      <a href="#delivery">Доставка</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#order">Заказать</a>
+    </nav>
+    <a href="#order" class="btn small">Заказать</a>
+  </div>
+</header>
+
+<section class="hero" style="padding:76px 0">
+  <div class="container hero-grid">
+    <div>
+      <h1>Свежая обжарка каждое утро.<br><span>Доставка за 40 минут</span></h1>
+      <p class="lead">Зерна с ферм Бразилии и Эфиопии, обжарка на месте, выпечка из собственной пекарни. Закажите кофе и завтрак - привезём горячим.</p>
+      <div class="hero-cta">
+        <a href="#order" class="btn">Заказать доставку</a>
+        <a href="#menu" class="btn ghost" style="color:#e8b04b;border-color:#e8b04b">Смотреть меню</a>
+      </div>
+      <p class="hero-note">Работаем ежедневно 8:00–22:00 · Доставка по городу от 500 ₽ бесплатно</p>
+    </div>
+    <div class="hero-card">
+      <div class="big">−20%</div>
+      <p>на первый заказ по промокоду ЗЕРНО.<br>Действует при заказе через сайт.</p>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div><b>40 мин</b><span>среднее время доставки</span></div>
+    <div><b>12 сортов</b><span>зерна в обжарке каждый день</span></div>
+    <div><b>4.9</b><span>рейтинг на картах</span></div>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="container">
+    <h2>Меню</h2>
+    <p class="sub">Классика и авторские напитки. Цены на сайте - как в кофейне.</p>
+    <div class="menu-grid">
+      <div class="menu-item"><div><b>Эспрессо</b><span class="desc">крепкий, на зерне арабики</span></div><div class="cost">180 ₽</div></div>
+      <div class="menu-item"><div><b>Капучино</b><span class="desc">на молоке фермерской фермы</span></div><div class="cost">290 ₽</div></div>
+      <div class="menu-item"><div><b>Флэт уайт</b><span class="desc">двойной шот, бархатная пенка</span></div><div class="cost">320 ₽</div></div>
+      <div class="menu-item"><div><b>Раф «Зерно»</b><span class="desc">фирменный, со сливками и карамелью</span></div><div class="cost">340 ₽</div></div>
+      <div class="menu-item"><div><b>Фильтр-кофе дня</b><span class="desc">сорт меняется еженедельно</span></div><div class="cost">260 ₽</div></div>
+      <div class="menu-item"><div><b>Матча латте</b><span class="desc">церемониальная матча, овсяное молоко</span></div><div class="cost">330 ₽</div></div>
+      <div class="menu-item"><div><b>Круассан классический</b><span class="desc">выпечка собственной пекарни</span></div><div class="cost">220 ₽</div></div>
+      <div class="menu-item"><div><b>Завтрак «Зерно»</b><span class="desc">яичница, тосты, салат, кофе</span></div><div class="cost">590 ₽</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery" style="background:#efe6d8">
+  <div class="container">
+    <h2>Доставка и самовывоз</h2>
+    <p class="sub">Заказывайте через сайт - быстрее, чем по телефону.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic">🛵</div>
+        <h3>Доставка за 40 минут</h3>
+        <p>По городу от 500 ₽ - бесплатно. Кофе везём в термоупаковке, приедет горячим.</p>
+      </div>
+      <div class="card">
+        <div class="ic">🥡</div>
+        <h3>Самовывоз со скидкой 10%</h3>
+        <p>Заказ готовим к указанному времени. Покажите номер заказа на кассе.</p>
+      </div>
+      <div class="card">
+        <div class="ic">🫘</div>
+        <h3>Зерно домой</h3>
+        <p>Продаём обжарку недели в упаковке 250 г. Мелем под ваш способ заваривания.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <h2>Отзывы гостей</h2>
+    <p class="sub">Более 700 отзывов со средней оценкой 4.9.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Лучший флэт уайт в городе, проверено. Заказываю доставку в офис - всегда вовремя и горячим.»
+        <div class="who">Ксения<span>Заказывает доставку 2 раза в неделю</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Приходил за ноутбуком поработать - вай-фай быстрый, розетки у каждого столика. Остался на весь день.»
+        <div class="who">Павел<span>Работает из кофейни</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        «Круассаны тают во рту. В час пик бывает тесновато, но это лучший знак для кофейни.»
+        <div class="who">Людмила<span>Соседка по дому</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="order">
+  <div class="container cta-grid">
+    <div>
+      <h2>Закажите кофе прямо сейчас</h2>
+      <p class="sub">Оставьте заказ - перезвоним для подтверждения за 5 минут в рабочее время.</p>
+      <ul style="list-style:none">
+        <li style="margin-bottom:10px">✓ Промокод ЗЕРНО: −20% на первый заказ</li>
+        <li style="margin-bottom:10px">✓ Доставка от 500 ₽ бесплатно</li>
+        <li>✓ Готовим к указанному времени</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Демо-режим: форма не отправляет данные.');">
+      <label for="name">Ваше имя</label>
+      <input id="name" type="text" placeholder="Иван" required>
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+      <label for="order-type">Тип заказа</label>
+      <select id="order-type">
+        <option>Доставка</option>
+        <option>Самовывоз</option>
+        <option>Зерно домой</option>
+      </select>
+      <label for="comment">Комментарий к заказу</label>
+      <textarea id="comment" rows="3" placeholder="Например: 2 капучино, 1 круассан, без сахара"></textarea>
+      <button class="btn" type="submit">Оформить заказ</button>
+      <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© Кофейня «Зерно», 2026 · Демо-проект SiteCraft</div>
+    <div>г. Город, ул. Кофейная, 3 · +7 (000) 000-00-00</div>
+  </div>
+</footer>
+
+</body>
+</html>
