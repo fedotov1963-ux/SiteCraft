@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ДенталПро - имплантация и лечение зубов | Демо-кейс SiteCraft</title>
+<meta name="description" content="Демо-лендинг стоматологической клиники для рекламной кампании. Проект SiteCraft.">
+<style>
+  :root{
+    --blue:#0e63b8; --blue-dark:#0a4a8a; --teal:#12a5a0; --ink:#16222e;
+    --muted:#5b6b7a; --bg:#f5f9fc; --card:#ffffff; --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  a{color:var(--blue);text-decoration:none}
+  h2{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+
+  /* Шапка */
+  header{background:#fff;border-bottom:1px solid #e3ecf3;position:sticky;top:0;z-index:10}
+  .header-in{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-size:22px;font-weight:700;color:var(--blue)}
+  .logo span{color:var(--teal)}
+  .header-in a.tel{font-weight:600;color:var(--ink)}
+  .btn{display:inline-block;background:var(--blue);color:#fff;padding:12px 26px;border-radius:12px;font-weight:600;border:none;cursor:pointer;font-size:16px;transition:background .2s}
+  .btn:hover{background:var(--blue-dark)}
+  .btn.small{padding:9px 18px;font-size:14px}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,#eaf4fd 0%,#f2fbf9 100%);padding:64px 0}
+  .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .badge{display:inline-block;background:#dff3f2;color:var(--teal);font-weight:600;padding:6px 14px;border-radius:999px;font-size:13px;margin-bottom:16px}
+  .hero h1{font-size:38px;line-height:1.2;margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:var(--blue)}
+  .hero p.lead{font-size:18px;color:var(--muted);margin-bottom:24px}
+  .hero-points{list-style:none;margin-bottom:28px}
+  .hero-points li{padding-left:28px;position:relative;margin-bottom:10px}
+  .hero-points li::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--teal);box-shadow:inset 0 0 0 4px #fff,0 0 0 1px var(--teal)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13px;color:var(--muted)}
+  .hero-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:0 12px 30px rgba(14,99,184,.12)}
+  .hero-card .price-old{color:var(--muted);text-decoration:line-through}
+  .hero-card .price{font-size:34px;font-weight:700;color:var(--blue);margin:4px 0 12px}
+  .hero-card ul{list-style:none;font-size:14px;margin-bottom:18px}
+  .hero-card ul li{padding:6px 0;border-bottom:1px dashed #e3ecf3}
+  .hero-card ul li:last-child{border-bottom:none}
+
+  /* Цифры */
+  .stats{background:var(--blue);color:#fff;padding:36px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+  .stats b{font-size:30px;display:block}
+  .stats span{font-size:14px;opacity:.85}
+
+  /* Секции */
+  section{padding:64px 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:0 6px 18px rgba(22,34,46,.06)}
+  .card h3{font-size:19px;margin-bottom:8px}
+  .card .card-price{font-size:22px;font-weight:700;color:var(--blue);margin:10px 0}
+  .card p{color:var(--muted);font-size:15px}
+  .card .tag{display:inline-block;font-size:12px;font-weight:600;color:var(--teal);background:#dff3f2;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+
+  /* Шаги */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:step}
+  .step{background:#fff;border-radius:var(--radius);padding:24px;position:relative;counter-increment:step}
+  .step::before{content:counter(step);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;margin-bottom:14px}
+  .step h3{font-size:17px;margin-bottom:6px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  /* Врачи */
+  .docs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .doc{background:#fff;border-radius:var(--radius);padding:24px;text-align:center}
+  .doc .ava{width:84px;height:84px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:26px}
+  .doc .a1{background:linear-gradient(135deg,var(--blue),#4f9fd8)}
+  .doc .a2{background:linear-gradient(135deg,var(--teal),#5ec9c4)}
+  .doc .a3{background:linear-gradient(135deg,#6a5acd,#9b8de0)}
+  .doc h3{font-size:17px;margin-bottom:4px}
+  .doc p{font-size:14px;color:var(--muted)}
+  .doc .exp{margin-top:10px;font-size:13px;font-weight:600;color:var(--blue)}
+
+  /* Отзывы */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;font-size:15px}
+  .review .stars{color:#f5a623;letter-spacing:2px;margin-bottom:10px}
+  .review .who{margin-top:14px;font-weight:600;font-size:14px}
+  .review .who span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+
+  /* FAQ */
+  details{background:#fff;border-radius:12px;margin-bottom:12px;padding:0 20px;box-shadow:0 4px 12px rgba(22,34,46,.05)}
+  summary{cursor:pointer;font-weight:600;padding:18px 0;list-style:none;position:relative;padding-right:32px}
+  summary::after{content:"+";position:absolute;right:0;top:14px;font-size:22px;color:var(--blue)}
+  details[open] summary::after{content:"−"}
+  details p{padding:0 0 18px;color:var(--muted)}
+
+  /* Форма */
+  .cta{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .cta h2{color:#fff}
+  .cta .sub{color:#cfe3f5}
+  form{background:#fff;border-radius:var(--radius);padding:30px;color:var(--ink)}
+  form label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  form input,form select{width:100%;padding:12px 14px;border:1px solid #d4e0ea;border-radius:10px;font-size:15px;margin-bottom:16px;font-family:inherit}
+  form input:focus,form select:focus{outline:2px solid var(--blue);border-color:transparent}
+  form .btn{width:100%}
+  form .agree{font-size:12px;color:var(--muted);margin-top:12px;margin-bottom:0}
+
+  footer{background:#101d29;color:#8fa3b5;padding:28px 0;font-size:13px}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-note{background:#ffd166;color:#16222e;text-align:center;padding:8px 12px;font-size:13px;font-weight:600}
+
+  @media(max-width:900px){
+    .hero-grid,.cta-grid{grid-template-columns:1fr}
+    .cards,.docs,.reviews{grid-template-columns:1fr}
+    .steps,.stats-grid{grid-template-columns:repeat(2,1fr)}
+    .hero h1{font-size:28px}
+    h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-note">Демо-проект: лендинг создан для портфолио SiteCraft. Клиника вымышленная, формы не отправляют данные.</div>
+
+<header>
+  <div class="container header-in">
+    <div class="logo">Дентал<span>Про</span></div>
+    <div>
+      <a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a>
+      <a href="#zapis" class="btn small" style="margin-left:16px">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:64px 0">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">Бесплатная консультация до конца месяца</span>
+      <h1>Имплантация зубов <em>под ключ</em> - от 24 900 ₽ за зуб</h1>
+      <p class="lead">Консультация, КТ, анестезия и коронка - всё включено. Рассрочка 0% на 6 месяцев, гарантия на имплант 10 лет.</p>
+      <ul class="hero-points">
+        <li>Опытные хирурги - более 5 000 установленных имплантов</li>
+        <li>Одноэтапная имплантация - коронка за 3–4 дня</li>
+        <li>Лечение без боли - седация по показаниям</li>
+      </ul>
+      <div class="hero-cta">
+        <a href="#zapis" class="btn">Записаться на консультацию</a>
+        <a href="#prices" class="btn ghost">Смотреть цены</a>
+      </div>
+      <p class="hero-note" style="margin-top:14px">Работаем ежедневно 9:00–21:00 · Первичный приём - бесплатно</p>
+    </div>
+    <div class="hero-card">
+      <b>Акция для новых пациентов</b>
+      <div class="price-old">35 000 ₽</div>
+      <div class="price">24 900 ₽</div>
+      <ul>
+        <li>Консультация и план лечения</li>
+        <li>Имплант с абатментом</li>
+        <li>Металлокерамическая коронка</li>
+        <li>Гарантия 10 лет по договору</li>
+      </ul>
+      <a href="#zapis" class="btn" style="width:100%;text-align:center">Записаться по акции</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div><b>15 лет</b><span>работы клиники</span></div>
+    <div><b>12 400+</b><span>довольных пациентов</span></div>
+    <div><b>98%</b><span>рекомендуют нас друзьям</span></div>
+    <div><b>4.9</b><span>средняя оценка на картах</span></div>
+  </div>
+</div>
+
+<section id="prices">
+  <div class="container">
+    <h2>Популярные услуги и цены</h2>
+    <p class="sub">Цены фиксируем в плане лечения до начала работ - без сюрпризов в процессе.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">Хит</span>
+        <h3>Имплантация под ключ</h3>
+        <div class="card-price">от 24 900 ₽</div>
+        <p>Имплант, абатмент, коронка. Одноэтапная или классическая схема - по показаниям.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Без боли</span>
+        <h3>Лечение кариеса</h3>
+        <div class="card-price">от 4 500 ₽</div>
+        <p>Современная анестезия, пломбы премиум-класса, гарантия на работу 2 года.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Эстетика</span>
+        <h3>Профессиональная чистка</h3>
+        <div class="card-price">от 6 900 ₽</div>
+        <p>Ультразвук, Air Flow, полировка и укрепление эмали. За 40 минут.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#eef5fb">
+  <div class="container">
+    <h2>Как проходит лечение</h2>
+    <p class="sub">От первого визита до готовой улыбки - 4 шага.</p>
+    <div class="steps">
+      <div class="step"><h3>Консультация и КТ</h3><p>Осмотр, снимок, план лечения и точная смета. Бесплатно.</p></div>
+      <div class="step"><h3>План лечения</h3><p>Подбираем имплант под костную ткань и бюджет, фиксируем цену.</p></div>
+      <div class="step"><h3>Установка</h3><p>Операция 30–60 минут под анестезией. Отпускаем домой в тот же день.</p></div>
+      <div class="step"><h3>Коронка и контроль</h3><p>Коронка через 3–4 дня, регулярные осмотры по гарантии.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Врачи клиники</h2>
+    <p class="sub">Принимают ведущие специалисты - хирурги и ортопеды с опытом от 12 лет.</p>
+    <div class="docs">
+      <div class="doc">
+        <div class="ava a1">МК</div>
+        <h3>Михаил Ковалёв</h3>
+        <p>Хирург-имплантолог, кандидат медицинских наук</p>
+        <div class="exp">17 лет опыта · 5 000+ имплантов</div>
+      </div>
+      <div class="doc">
+        <div class="ava a2">АС</div>
+        <h3>Анна Соколова</h3>
+        <p>Ортопед, специалист по эстетической реабилитации</p>
+        <div class="exp">12 лет опыта · 3 000+ коронок</div>
+      </div>
+      <div class="doc">
+        <div class="ava a3">ДО</div>
+        <h3>Дмитрий Орлов</h3>
+        <p>Терапевт, эндодонтист</p>
+        <div class="exp">14 лет опыта · лечение без боли</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#eef5fb">
+  <div class="container">
+    <h2>Что говорят пациенты</h2>
+    <p class="sub">Реальные отзывы собираем после каждого приёма.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Поставил два импланта, боялся больше всего на свете. В итоге - никакой боли, коронки через четыре дня, жую как на своих.»
+        <div class="who">Сергей, 52 года<span>Имплантация двух зубов</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Пришла с острой болью в субботу - приняли сразу, вылечили за один визит. Всё объяснили, цена совпала с планом.»
+        <div class="who">Елена, 34 года<span>Лечение кариеса</span></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        «Делала чистку и отбеливание перед свадьбой. Результат - как на обложке, девочки в офисе все спрашивают, где делала.»
+        <div class="who">Марина, 29 лет<span>Чистка и отбеливание</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Частые вопросы</h2>
+    <p class="sub">Отвечаем на то, о чём спрашивают чаще всего перед записью.</p>
+    <details>
+      <summary>Имплантация действительно безболезненная?</summary>
+      <p>Да. Операция проводится под местной анестезией, при тревожности - с седацией. Большинство пациентов отмечают, что перенесли процедуру легче, чем ожидали.</p>
+    </details>
+    <details>
+      <summary>Сколько служит имплант?</summary>
+      <p>При правильной гигиене и регулярных осмотрах - всю жизнь. На имплант даём гарантию 10 лет по договору.</p>
+    </details>
+    <details>
+      <summary>Можно ли в рассрочку?</summary>
+      <p>Да, рассрочка 0% на 6 месяцев без банка - оформляем прямо в клинике за 10 минут.</p>
+    </details>
+    <details>
+      <summary>Что входит в цену «под ключ»?</summary>
+      <p>Имплант, абатмент, коронка, консультация, КТ, анестезия и все контрольные осмотры. Смета фиксируется до начала лечения и не меняется.</p>
+    </details>
+  </div>
+</section>
+
+<section class="cta" id="zapis">
+  <div class="container cta-grid">
+    <div>
+      <h2>Запишитесь на бесплатную консультацию</h2>
+      <p class="sub">Осмотр, КТ и план лечения - бесплатно и ни к чему не обязывает. Ответим в течение 15 минут в рабочее время.</p>
+      <ul style="list-style:none">
+        <li style="margin-bottom:10px">✓ Приём сегодня и завтра</li>
+        <li style="margin-bottom:10px">✓ Рассрочка 0% на 6 месяцев</li>
+        <li>✓ Гарантия на работу по договору</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Демо-режим: форма не отправляет данные.');">
+      <label for="name">Ваше имя</label>
+      <input id="name" type="text" placeholder="Иван" required>
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+      <label for="service">Услуга</label>
+      <select id="service">
+        <option>Консультация и КТ</option>
+        <option>Имплантация зубов</option>
+        <option>Лечение кариеса</option>
+        <option>Чистка и отбеливание</option>
+      </select>
+      <button class="btn" type="submit">Записаться</button>
+      <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© ДенталПро, 2026 · Демо-проект SiteCraft</div>
+    <div>г. Город, ул. Примерная, 1 · +7 (000) 000-00-00</div>
+  </div>
+</footer>
+
+</body>
+</html>
