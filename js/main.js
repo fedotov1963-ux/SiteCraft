@@ -220,12 +220,24 @@ if (leadForm) {
       tail.style.minHeight = vh + 'px';
       [fw, gw].forEach((w) => { if (w) w.style.zoom = ''; });
       if (fin && foot) {
-        const avail = vh - GAP - HEADER_D;
-        const h = outerHeight(fin) + outerHeight(foot);
-        if (h > avail) {
-          const z = Math.max(0.5, ((avail - 2) / h).toFixed(3));
+        // контентная область .tail: минус его собственные отступы
+        const boxH = tail.clientHeight - padV(tail);
+        const finH = outerHeight(fin);
+        const gwH = gw ? outerHeight(gw) : 0;
+        // паддинги и отступы подвала НЕ масштабируются вместе с .footer-grid
+        const extra = outerHeight(foot) - gwH;
+        const scaled = finH + gwH;
+        const need = boxH - 2 - extra;
+        if (scaled > need) {
+          const z = Math.max(0.5, (need / scaled).toFixed(3));
           if (fw) fw.style.zoom = z;
           if (gw) gw.style.zoom = z;
+          // защита как у обычных секций: если даже на минимальном масштабе
+          // низ вылезает - прижимаем содержимое к верху, чтобы заголовок
+          // не уходил под шапку
+          tail.style.justifyContent = scaled * z + extra > boxH ? 'flex-start' : '';
+        } else {
+          tail.style.justifyContent = '';
         }
       }
     }
