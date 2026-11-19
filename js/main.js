@@ -224,6 +224,25 @@ if (leadForm) {
   window.addEventListener('orientationchange', () => setTimeout(fit, 250));
   window.addEventListener('load', fit);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+  // если страница открыта с якорем (#services и т.д.), подгонка высот
+  // секций сдвигает макет - возвращаемся к нужному блоку после пересчёта,
+  // пока пользователь сам не начал скроллить
+  let userScrolled = false;
+  let programmaticScroll = false;
+  window.addEventListener('scroll', () => {
+    if (!programmaticScroll) userScrolled = true;
+  }, { passive: true });
+  function settleToHash() {
+    if (userScrolled || !location.hash) return;
+    const t = document.querySelector(location.hash);
+    if (!t) return;
+    programmaticScroll = true;
+    t.scrollIntoView();
+    requestAnimationFrame(() => { programmaticScroll = false; });
+  }
+  window.addEventListener('load', settleToHash);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(settleToHash);
 })();
 
 // Кнопка "Смотреть, что входит" ведёт к карточке выбранного в калькуляторе типа сайта

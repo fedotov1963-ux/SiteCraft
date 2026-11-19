@@ -554,7 +554,9 @@ footer a:hover { color: var(--white); }
 /* ---------- Компьютер: один блок - один экран ---------- */
 @media (min-width: 901px) {
   :root { --txt: clamp(17px, 1.35vw, 26px); }
-  html { scroll-snap-type: y mandatory; }
+  /* верхний край "экрана" для прилипания и переходов по якорю - ниже
+     фиксированной шапки: заголовки секций никогда не уходят под неё */
+  html { scroll-snap-type: y mandatory; scroll-padding-top: 76px; }
   /* каждая секция целиком на экране, контент по центру */
   body > section:not(.hero) {
     min-height: 100vh; scroll-margin-top: 0;
