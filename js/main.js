@@ -110,6 +110,7 @@ if (leadForm) {
 (function fitSections() {
   const mobile = window.matchMedia('(max-width: 900px)');
   const HEADER = 64;   // высота фиксированной шапки с брендом (телефон)
+  const HEADER_D = 76; // высота фиксированной шапки (компьютер)
   const GAP = 12;      // небольшой воздух снизу экрана
   // высота элемента с учётом отступов: защита от схлопывания margin
   function outerHeight(el) {
@@ -171,7 +172,9 @@ if (leadForm) {
       sec.style.minHeight = vh + 'px';
       if (!wrap) return;
       wrap.style.zoom = '';
-      const avail = vh - GAP - padV(sec) - (isHero ? padV(wrap) : 0);
+      // фиксированная шапка перекрывает верх экрана: контент считаем
+      // только в видимой области ниже неё, иначе сверху пусто, а низ обрезан
+      const avail = vh - GAP - padV(sec) - (isHero ? padV(wrap) : HEADER_D);
       const h = isHero
         ? [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0)
         : outerHeight(wrap);
@@ -213,7 +216,7 @@ if (leadForm) {
       tail.style.minHeight = vh + 'px';
       [fw, gw].forEach((w) => { if (w) w.style.zoom = ''; });
       if (fin && foot) {
-        const avail = vh - GAP - padV(tail);
+        const avail = vh - GAP - padV(tail) - HEADER_D;
         const h = outerHeight(fin) + outerHeight(foot);
         if (h > avail) {
           const z = Math.max(0.5, ((avail - 2) / h).toFixed(3));
@@ -242,7 +245,10 @@ if (leadForm) {
     const t = document.querySelector(location.hash);
     if (!t) return;
     programmaticScroll = true;
-    t.scrollIntoView();
+    // scrollIntoView игнорирует scroll-padding и кладёт секцию под шапку -
+    // вычитаем её высоту явно
+    const top = t.getBoundingClientRect().top + window.scrollY - HEADER_D;
+    window.scrollTo(0, Math.max(0, top));
     requestAnimationFrame(() => { programmaticScroll = false; });
   }
   window.addEventListener('load', settleToHash);
@@ -257,7 +263,9 @@ if (calcCta) {
     const cards = document.querySelectorAll('.price-card');
     const target = cards[state.type];
     if (!target) return;
-    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const pr = document.getElementById('pricing');
+    const pTop = pr.getBoundingClientRect().top + window.scrollY - 76;
+    window.scrollTo({ top: Math.max(0, pTop), behavior: 'smooth' });
     // на телефоне карточки листаются горизонтально - подводим нужную к центру
     if (window.matchMedia('(max-width: 900px)').matches) {
       const row = document.querySelector('.pricing');

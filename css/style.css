@@ -561,14 +561,14 @@ footer a:hover { color: var(--white); }
   body > section:not(.hero) {
     min-height: 100vh; scroll-margin-top: 0;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 96px 0 28px;
+    padding: 24px 0 24px;
   }
   body > section:not(.hero) > .container { width: 100%; }
   /* блок с формой заявки и подвал - один общий экран */
   .tail {
     min-height: 100vh; scroll-snap-align: start; scroll-margin-top: 0;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 96px 0 24px;
+    padding: 24px 0 24px;
     background: var(--ink);
   }
   .tail .final { min-height: 0; padding: 0; scroll-snap-align: none; }
@@ -589,9 +589,9 @@ footer a:hover { color: var(--white); }
   body { font-size: clamp(17px, 1.35vw, 26px); }
   .container { max-width: 1280px; }
   .nav-logo span { font-size: 16px; }
-  .pill { font-size: 18px; padding: 13px 16px 13px 28px; }
-  .pill .circle { width: 34px; height: 34px; }
-  .pill .circle svg { width: 16px; height: 16px; }
+  .pill { font-size: 15px; padding: 10px 12px 10px 20px; }
+  .pill .circle { width: 28px; height: 28px; }
+  .pill .circle svg { width: 13px; height: 13px; }
   /* кнопка "Смотреть, что входит" - во всю ширину блока оценки */
   .calc-out .btn {
     align-self: stretch; text-align: center;
@@ -626,7 +626,7 @@ footer a:hover { color: var(--white); }
   .cases-note { font-size: clamp(14px, 1.05vw, 17px); }
   /* автор - карточка на всю ширину страницы, вертикально компактнее:
      на обычных экранах масштаб не нужен, текст - как в "Как работаем" */
-  #author { padding: 48px 0 16px; }
+  #author { padding: 24px 0 20px; }
   .author-box { max-width: none; padding: 24px 36px; grid-template-columns: 240px 1fr; gap: 32px; }
   .author-box h3 { font-size: clamp(23px, 1.8vw, 30px); margin-bottom: 8px; }
   .author-box p { font-size: var(--txt); margin-bottom: 8px; }
@@ -634,13 +634,13 @@ footer a:hover { color: var(--white); }
   .requisites { font-size: clamp(15px, 1.15vw, 18.5px); margin-top: 12px; }
   .requisites li { padding: 6px 0; }
   /* цены - карточки шире, текст крупнее, кнопка компактная */
-  .price-card { padding: 20px 28px; }
+  .price-card { padding: 18px 28px; }
   .price-card h3 { font-size: clamp(20px, 1.5vw, 26px); }
-  .price-card .for { font-size: clamp(15.5px, 1.15vw, 19px); margin-bottom: 12px; }
-  .price { font-size: clamp(26px, 2.1vw, 36px); margin-bottom: 12px; }
+  .price-card .for { font-size: clamp(15.5px, 1.15vw, 19px); margin-bottom: 10px; }
+  .price { font-size: clamp(26px, 2.1vw, 36px); margin-bottom: 10px; }
   .price small { font-size: clamp(14px, 1.05vw, 17.5px); }
-  .price-card ul { margin-bottom: 12px; }
-  .price-card li { font-size: var(--txt); padding: 5px 0 5px 30px; line-height: 1.45; }
+  .price-card ul { margin-bottom: 10px; }
+  .price-card li { font-size: var(--txt); padding: 4px 0 4px 30px; line-height: 1.45; }
   .price-card li::before { top: 14px; width: 15px; height: 9px; }
   .price-card .btn {
     align-self: center; font-size: clamp(16px, 1.2vw, 20px); padding: 12px 28px;
