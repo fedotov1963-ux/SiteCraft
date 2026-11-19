@@ -621,8 +621,10 @@ footer a:hover { color: var(--white); }
   .case .what { font-size: var(--txt); }
   .case .term { font-size: clamp(14px, 1vw, 17px); }
   .cases-note { font-size: clamp(14px, 1.05vw, 17px); }
-  /* автор - карточка на всю ширину страницы */
-  .author-box { max-width: none; padding: 56px; grid-template-columns: 320px 1fr; }
+  /* автор - карточка на всю ширину страницы, вертикально компактнее:
+     на обычных экранах масштаб не нужен, текст - как в "Как работаем" */
+  #author { padding: 48px 0 16px; }
+  .author-box { max-width: none; padding: 32px 40px; grid-template-columns: 300px 1fr; }
   .author-box h3 { font-size: clamp(23px, 1.8vw, 30px); }
   .author-box p { font-size: var(--txt); }
   .requisites { font-size: clamp(15px, 1.15vw, 18.5px); }

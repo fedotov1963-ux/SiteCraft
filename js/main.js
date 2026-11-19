@@ -123,9 +123,10 @@ if (leadForm) {
     return parseFloat(m.paddingTop) + parseFloat(m.paddingBottom) +
       parseFloat(m.borderTopWidth) + parseFloat(m.borderBottomWidth);
   }
-  function zoomToFit(wrap, contentH, avail) {
+  function zoomToFit(wrap, contentH, avail, floor) {
+    const min = floor || 0.6;
     if (contentH > avail) {
-      wrap.style.zoom = Math.max(0.6, ((avail - 2) / contentH).toFixed(3));
+      wrap.style.zoom = Math.max(min, ((avail - 2) / contentH).toFixed(3));
     }
   }
   // надписи-ярлыки секций ("Как работаем", "Цены" и т.д.) - одного
@@ -174,31 +175,27 @@ if (leadForm) {
       const h = isHero
         ? [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0)
         : outerHeight(wrap);
-      zoomToFit(wrap, h, avail);
+      // авто-масштаб секции автора ослаблен: биография должна быть
+      // таким же крупным текстом, как блоки "Как работаем"
+      zoomToFit(wrap, h, avail, sec.id === 'author' ? 0.85 : undefined);
       keepLabelSize(wrap);
     });
-    // блоки в секциях услуг, автора и цен - той же визуальной ширины,
-    // что и блоки кейсов (компенсация разного масштаба секций)
-    const refEl = document.querySelector('#cases .cases') || document.querySelector('#cases > .container');
-    const refW = refEl ? refEl.getBoundingClientRect().width : 0;
-    if (refW) {
-      const maxInner = window.innerWidth - 24;
-      [['services', '.svc-list'], ['author', '.author-box'], ['pricing', '.pricing']]
-        .forEach(([id, sel]) => {
-          const sec = document.getElementById(id);
-          const inner = sec && sec.querySelector(sel);
-          const wrap = sec && sec.querySelector(':scope > .container');
-          if (!inner || !wrap) return;
-          const z = parseFloat(wrap.style.zoom) || 1;
-          const w = Math.min(maxInner / z, refW / z);
-          inner.style.width = w + 'px';
-          // браузер не центрирует блок шире контейнера через margin: auto -
-          // задаём отступы явно, чтобы сетка стояла по центру секции
-          const m = (wrap.clientWidth - w) / 2;
-          inner.style.marginLeft = m + 'px';
-          inner.style.marginRight = m + 'px';
-        });
-    }
+    // блоки в секциях услуг, автора и цен - визуально той же ширины,
+    // что и блоки этапов: компенсируем только собственный масштаб секции
+    document.querySelectorAll('#services .svc-list, #author .author-box, #pricing .pricing')
+      .forEach((inner) => {
+        const sec = inner.closest('section');
+        const wrap = sec && sec.querySelector(':scope > .container');
+        if (!wrap) return;
+        const z = parseFloat(wrap.style.zoom) || 1;
+        const w = wrap.clientWidth / z;
+        inner.style.width = w + 'px';
+        // браузер не центрирует блок шире контейнера через margin: auto -
+        // задаём отступы явно, чтобы блок стоял по центру секции
+        const m = (wrap.clientWidth - w) / 2;
+        inner.style.marginLeft = m + 'px';
+        inner.style.marginRight = m + 'px';
+      });
     // блок с формой заявки + подвал - один общий экран
     const tail = document.querySelector('.tail');
     if (tail) {
