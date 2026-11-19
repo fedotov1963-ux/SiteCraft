@@ -554,21 +554,22 @@ footer a:hover { color: var(--white); }
 /* ---------- Компьютер: один блок - один экран ---------- */
 @media (min-width: 901px) {
   :root { --txt: clamp(17px, 1.35vw, 26px); }
-  /* верхний край "экрана" для прилипания и переходов по якорю - ниже
-     фиксированной шапки: заголовки секций никогда не уходят под неё */
-  html { scroll-snap-type: y mandatory; scroll-padding-top: 76px; }
-  /* каждая секция целиком на экране, контент по центру */
+  /* секции прилипают к самому верху окна: фиксированная шапка плавает
+     поверх верхнего отступа секции, а контент центрируется строго
+     в видимой области под шапкой - без обрезки низа */
+  html { scroll-snap-type: y mandatory; scroll-padding-top: 0; }
+  /* каждая секция целиком на экране; padding-top = высоте шапки */
   body > section:not(.hero) {
     min-height: 100vh; scroll-margin-top: 0;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 24px 0 24px;
+    padding: 76px 0 24px;
   }
   body > section:not(.hero) > .container { width: 100%; }
   /* блок с формой заявки и подвал - один общий экран */
   .tail {
     min-height: 100vh; scroll-snap-align: start; scroll-margin-top: 0;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 24px 0 24px;
+    padding: 76px 0 24px;
     background: var(--ink);
   }
   .tail .final { min-height: 0; padding: 0; scroll-snap-align: none; }
@@ -626,7 +627,7 @@ footer a:hover { color: var(--white); }
   .cases-note { font-size: clamp(14px, 1.05vw, 17px); }
   /* автор - карточка на всю ширину страницы, вертикально компактнее:
      на обычных экранах масштаб не нужен, текст - как в "Как работаем" */
-  #author { padding: 24px 0 20px; }
+  #author { padding: 76px 0 20px; }
   .author-box { max-width: none; padding: 24px 36px; grid-template-columns: 240px 1fr; gap: 32px; }
   .author-box h3 { font-size: clamp(23px, 1.8vw, 30px); margin-bottom: 8px; }
   .author-box p { font-size: var(--txt); margin-bottom: 8px; }

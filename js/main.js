@@ -172,9 +172,12 @@ if (leadForm) {
       sec.style.minHeight = vh + 'px';
       if (!wrap) return;
       wrap.style.zoom = '';
-      // фиксированная шапка перекрывает верх экрана: контент считаем
-      // только в видимой области ниже неё, иначе сверху пусто, а низ обрезан
-      const avail = vh - GAP - padV(sec) - (isHero ? padV(wrap) : HEADER_D);
+      // контент центрируется CSS-ом в области под шапкой (padding-top
+      // секции = высоте шапки): доступная высота - только видимая часть
+      // экрана ниже шапки с воздухом снизу
+      const avail = isHero
+        ? vh - GAP - padV(wrap)
+        : vh - GAP - HEADER_D;
       const h = isHero
         ? [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0)
         : outerHeight(wrap);
@@ -216,7 +219,7 @@ if (leadForm) {
       tail.style.minHeight = vh + 'px';
       [fw, gw].forEach((w) => { if (w) w.style.zoom = ''; });
       if (fin && foot) {
-        const avail = vh - GAP - padV(tail) - HEADER_D;
+        const avail = vh - GAP - HEADER_D;
         const h = outerHeight(fin) + outerHeight(foot);
         if (h > avail) {
           const z = Math.max(0.5, ((avail - 2) / h).toFixed(3));
@@ -245,9 +248,9 @@ if (leadForm) {
     const t = document.querySelector(location.hash);
     if (!t) return;
     programmaticScroll = true;
-    // scrollIntoView игнорирует scroll-padding и кладёт секцию под шапку -
-    // вычитаем её высоту явно
-    const top = t.getBoundingClientRect().top + window.scrollY - HEADER_D;
+    // секции прилипают к верху окна (scroll-padding 0): просто к их верхней
+    // границе - шапка перекрывает только отступ секции
+    const top = t.getBoundingClientRect().top + window.scrollY;
     window.scrollTo(0, Math.max(0, top));
     requestAnimationFrame(() => { programmaticScroll = false; });
   }
@@ -264,7 +267,7 @@ if (calcCta) {
     const target = cards[state.type];
     if (!target) return;
     const pr = document.getElementById('pricing');
-    const pTop = pr.getBoundingClientRect().top + window.scrollY - 76;
+    const pTop = pr.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: Math.max(0, pTop), behavior: 'smooth' });
     // на телефоне карточки листаются горизонтально - подводим нужную к центру
     if (window.matchMedia('(max-width: 900px)').matches) {
