@@ -597,24 +597,27 @@ footer a:hover { color: var(--white); }
     align-self: stretch; text-align: center;
     font-size: 17px; padding: 15px 26px;
   }
-  .section-head { max-width: 840px; margin-bottom: 52px; }
-  .section-label { font-size: clamp(17px, 1.3vw, 23px); }
+  .section-head { max-width: 840px; margin-bottom: 30px; }
+  .section-label { font-size: clamp(17px, 1.3vw, 23px); margin-bottom: 10px; }
   h2 { font-size: clamp(30px, 3.6vw, 52px); }
-  .section-sub { font-size: var(--txt); margin-top: 20px; }
+  .section-sub { font-size: var(--txt); margin-top: 12px; }
   /* этапы */
   .step .num { font-size: 16px; }
   .step h3 { font-size: clamp(19px, 1.5vw, 25px); }
   .step p { font-size: var(--txt); }
-  /* услуги - два слева, два справа, один внизу по центру */
-  .svc-list { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  /* услуги - три колонки, последняя карточка шире: два ряда вместо трёх,
+     секция целиком влезает в экран, текст полного размера без зума */
+  .svc-list { max-width: none; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
   .svc {
-    grid-template-columns: 56px 1fr; gap: 22px; align-items: start;
-    padding: 30px 32px; border: 1px solid var(--line); border-radius: 18px;
+    grid-template-columns: 52px 1fr; gap: 20px; align-items: start;
+    padding: 16px 24px; border: 1px solid var(--line); border-radius: 18px;
   }
-  .svc h3 { font-size: clamp(19px, 1.5vw, 25px); }
-  .svc p { font-size: var(--txt); max-width: none; }
-  .svc .tag { grid-column: 2; font-size: clamp(15px, 1.15vw, 19px); padding-top: 8px; }
-  .svc:last-child { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: calc(50% - 13px); }
+  .svc .icon { width: 48px; height: 48px; }
+  .svc .icon svg { width: 22px; height: 22px; }
+  .svc h3 { font-size: clamp(19px, 1.5vw, 25px); margin-bottom: 4px; }
+  .svc p { font-size: var(--txt); max-width: none; line-height: 1.5; }
+  .svc .tag { grid-column: 2; font-size: clamp(15px, 1.15vw, 19px); padding-top: 4px; }
+  .svc:last-child { grid-column: auto / span 2; justify-self: stretch; max-width: none; width: auto; }
   /* кейсы */
   .case .who { font-size: clamp(15px, 1.1vw, 18px); }
   .case .metric { font-size: clamp(30px, 2.4vw, 42px); }
@@ -624,19 +627,24 @@ footer a:hover { color: var(--white); }
   /* автор - карточка на всю ширину страницы, вертикально компактнее:
      на обычных экранах масштаб не нужен, текст - как в "Как работаем" */
   #author { padding: 48px 0 16px; }
-  .author-box { max-width: none; padding: 32px 40px; grid-template-columns: 300px 1fr; }
-  .author-box h3 { font-size: clamp(23px, 1.8vw, 30px); }
-  .author-box p { font-size: var(--txt); }
-  .requisites { font-size: clamp(15px, 1.15vw, 18.5px); }
-  /* цены - карточки шире, текст крупнее */
-  .price-card { padding: 42px 38px; }
+  .author-box { max-width: none; padding: 24px 36px; grid-template-columns: 240px 1fr; gap: 32px; }
+  .author-box h3 { font-size: clamp(23px, 1.8vw, 30px); margin-bottom: 8px; }
+  .author-box p { font-size: var(--txt); margin-bottom: 8px; }
+  .author-photo { font-size: 50px; }
+  .requisites { font-size: clamp(15px, 1.15vw, 18.5px); margin-top: 12px; }
+  .requisites li { padding: 6px 0; }
+  /* цены - карточки шире, текст крупнее, кнопка компактная */
+  .price-card { padding: 20px 28px; }
   .price-card h3 { font-size: clamp(20px, 1.5vw, 26px); }
-  .price-card .for { font-size: clamp(15.5px, 1.15vw, 19px); }
-  .price { font-size: clamp(26px, 2.1vw, 36px); }
+  .price-card .for { font-size: clamp(15.5px, 1.15vw, 19px); margin-bottom: 12px; }
+  .price { font-size: clamp(26px, 2.1vw, 36px); margin-bottom: 12px; }
   .price small { font-size: clamp(14px, 1.05vw, 17.5px); }
-  .price-card li { font-size: var(--txt); padding: 10px 0 10px 30px; }
-  .price-card li::before { top: 19px; width: 15px; height: 9px; }
-  .price-card .btn { font-size: 17px; padding: 16px 28px; }
+  .price-card ul { margin-bottom: 12px; }
+  .price-card li { font-size: var(--txt); padding: 5px 0 5px 30px; line-height: 1.45; }
+  .price-card li::before { top: 14px; width: 15px; height: 9px; }
+  .price-card .btn {
+    align-self: center; font-size: clamp(16px, 1.2vw, 20px); padding: 12px 28px;
+  }
   /* faq */
   .faq { max-width: 940px; }
   summary { font-size: clamp(18px, 1.4vw, 23px); }

@@ -175,10 +175,17 @@ if (leadForm) {
       const h = isHero
         ? [...wrap.children].reduce((sum, el) => sum + outerHeight(el), 0)
         : outerHeight(wrap);
-      // авто-масштаб секции автора ослаблен: биография должна быть
-      // таким же крупным текстом, как блоки "Как работаем"
-      zoomToFit(wrap, h, avail, sec.id === 'author' ? 0.85 : undefined);
+      // авто-масштаб секций с крупным текстом ослаблен (не ниже 0.85):
+      // услуги, биография и цены должны читаться так же крупно,
+      // как блоки "Как работаем"
+      const BIG_TEXT = { author: 1, services: 1, pricing: 1 };
+      zoomToFit(wrap, h, avail, BIG_TEXT[sec.id] ? 0.85 : undefined);
       keepLabelSize(wrap);
+      // защита от обрезки заголовка: если контент даже на минимальном
+      // масштабе выше экрана, не даём центрированию утащить его верх
+      // под фиксированную шапку - прижимаем содержимое к верху секции
+      const overflowTop = wrap.getBoundingClientRect().height - avail > 2;
+      sec.style.justifyContent = overflowTop ? 'flex-start' : '';
     });
     // блоки в секциях услуг, автора и цен - визуально той же ширины,
     // что и блоки этапов: компенсируем только собственный масштаб секции
