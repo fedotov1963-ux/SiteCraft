@@ -85,12 +85,18 @@ if (leadForm) {
     e.preventDefault();
     status.className = 'form-status';
     status.textContent = 'Отправляем...';
+    const btn = leadForm.querySelector('button[type="submit"]');
     const data = Object.fromEntries(new FormData(leadForm).entries());
+    // защита от зависшего запроса: таймаут 10 секунд
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 10000);
+    if (btn) btn.disabled = true;   // защита от двойной отправки
     try {
       const res = await fetch(leadForm.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data),
+        signal: ctrl.signal,
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       status.className = 'form-status ok';
@@ -99,6 +105,9 @@ if (leadForm) {
     } catch (err) {
       status.className = 'form-status err';
       status.textContent = 'Не получилось отправить. Напишите напрямую в Telegram или на почту.';
+    } finally {
+      clearTimeout(timer);
+      if (btn) btn.disabled = false;
     }
   });
 }
@@ -258,7 +267,8 @@ if (leadForm) {
   }, { passive: true });
   function settleToHash() {
     if (userScrolled || !location.hash) return;
-    const t = document.querySelector(location.hash);
+    let t = null;
+    try { t = document.querySelector(location.hash); } catch (e) { return; }
     if (!t) return;
     programmaticScroll = true;
     // секции прилипают к верху окна (scroll-padding 0): просто к их верхней

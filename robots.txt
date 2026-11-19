@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fedotov1963-ux.github.io/SiteCraft/sitemap.xml
